@@ -68,36 +68,23 @@ godnix7 = {
 
 ---
 
-## `> deployed_projects.json`
+## `> deployed_projects.exe`
 
-```json
-[
-  {
-    "name": "LocalMusic",
-    "description": "Unified local music streaming platform with persistent playback.",
-    "tech": "TypeScript",
-    "url": "https://github.com/godnix7/LocalMusic"
-  },
-  {
-    "name": "alt-f4-deepfake-video-detection",
-    "description": "Deepfake video detection project.",
-    "tech": "Python",
-    "url": "https://github.com/godnix7/alt-f4-deepfake-video-detection"
-  },
-  {
-    "name": "EventByte",
-    "description": "Web platform for managing and discovering events.",
-    "tech": "TypeScript",
-    "url": "https://github.com/godnix7/EventByte"
-  },
-  {
-    "name": "BWAI_Obsidian_Logic",
-    "description": "Built for the Build with AI 24 Hrs Hackathon.",
-    "tech": "JavaScript",
-    "url": "https://github.com/godnix7/BWAI_Obsidian_Logic"
-  }
-]
-```
+<div align="center">
+  <a href="https://github.com/godnix7/LocalMusic">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=godnix7&repo=LocalMusic&theme=chartreuse-dark&bg_color=000000&title_color=00FF41&icon_color=00FF41&text_color=00FF41&border_color=00FF41" width="400" />
+  </a>
+  <a href="https://github.com/godnix7/alt-f4-deepfake-video-detection">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=godnix7&repo=alt-f4-deepfake-video-detection&theme=chartreuse-dark&bg_color=000000&title_color=00FF41&icon_color=00FF41&text_color=00FF41&border_color=00FF41" width="400" />
+  </a>
+  <br/>
+  <a href="https://github.com/godnix7/EventByte">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=godnix7&repo=EventByte&theme=chartreuse-dark&bg_color=000000&title_color=00FF41&icon_color=00FF41&text_color=00FF41&border_color=00FF41" width="400" />
+  </a>
+  <a href="https://github.com/godnix7/BWAI_Obsidian_Logic">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=godnix7&repo=BWAI_Obsidian_Logic&theme=chartreuse-dark&bg_color=000000&title_color=00FF41&icon_color=00FF41&text_color=00FF41&border_color=00FF41" width="400" />
+  </a>
+</div>
 
 ---
 

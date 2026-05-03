@@ -22,9 +22,9 @@ I'm a passionate Software Engineer and Backend Architect specializing in high-pe
 - **Inbox Defender & DeepFake Detector:** Advanced AI tools for modern threat mitigation.
 
 ## 📫 Let's Connect
-- [LinkedIn](#) *(Add your link here)*
+- [LinkedIn](#) https://www.linkedin.com/in/nischay-kademane-340687272/
 - [Portfolio](#) *(Add your link here)*
-- Email: *(Add your email here)*
+- Email: nischaykademane2006@gmail.com
 
 ---
 *"Designing systems with precision, securing them with zero trust, and building them for scale."*

@@ -181,9 +181,9 @@ export default function ClientExperience({ envVars }: { envVars: Record<string, 
         <footer className="py-20 px-10 border-t border-black/5 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono text-[#888] uppercase tracking-widest gap-8 bg-[#fbfbfb]">
            <p>© 2026 NISCHAY KADEMANE — CRAFTING ROBUST SYSTEMS</p>
            <div className="flex gap-16">
-              <a href="https://linkedin.com/in/nischay-kademane" target="_blank" className="hover:text-black transition-colors">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/nischaykademane/" target="_blank" className="hover:text-black transition-colors">LinkedIn</a>
               <a href="https://github.com/godnix7" target="_blank" className="hover:text-black transition-colors">GitHub</a>
-              <a href="https://twitter.com/nischay_k" target="_blank" className="hover:text-black transition-colors">Twitter</a>
+              <a href="https://x.com/NISCHAYKADEMANE" target="_blank" className="hover:text-black transition-colors">X</a>
            </div>
         </footer>
       </main>

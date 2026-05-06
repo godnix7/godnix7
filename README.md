@@ -58,7 +58,7 @@
 ### 📬 Connect With Me
 
 <p align="center">
-  <a href="https://linkedin.com/in/nischay-kademane" target="_blank">
+  <a href="https://www.linkedin.com/in/nischaykademane/" target="_blank">
     <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" />
   </a>
   &nbsp;&nbsp;
@@ -66,8 +66,8 @@
     <img src="https://skillicons.dev/icons?i=github" alt="GitHub" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://twitter.com/nischay_k" target="_blank">
-    <img src="https://skillicons.dev/icons?i=twitter" alt="Twitter" />
+  <a href="https://x.com/NISCHAYKADEMANE" target="_blank">
+    <img src="https://skillicons.dev/icons?i=x" alt="X" />
   </a>
   &nbsp;&nbsp;
   <a href="mailto:nischaykademane2006@gmail.com" target="_blank">

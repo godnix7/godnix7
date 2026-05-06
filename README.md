@@ -10,6 +10,12 @@
   <i>"Architecting digital environments where performance and aesthetics collide."</i>
 </p>
 
+<p align="center">
+  <a href="https://godnix7.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Portfolio" />
+  </a>
+</p>
+
 ---
 
 ### 🚀 Technical Arsenal

@@ -55,38 +55,24 @@
 > - Natural Language Processing integration for intelligent responses.
 > - Lightweight and scalable architecture deployed on Vercel.
 
----
-
-### 🏗️ Project Structure
-
-```bash
-godnix7/
-├── src/
-│   ├── app/            # Next.js App Router (Routing & Layouts)
-│   ├── components/     # Interactive 3D Scenes & UI Elements
-│   └── styles/         # Global Typography & Design Tokens
-├── public/             # Static Assets & Procedural Textures
-└── ...
-```
-
----
-
-### 🎨 Design Philosophy
-
-My work focuses on the **Intersection of Power and Simplicity**. I believe that a software engineer's portfolio should reflect their ability to handle complexity while delivering a refined, user-centric experience. 
-
-- **Robustness**: Systems that don't just run—they excel under load.
-- **Precision**: Pixel-perfect frontends backed by rock-solid logic.
-- **Innovation**: Leveraging AI and 3D technologies to push digital boundaries.
-
----
-
 ### 📬 Connect With Me
 
-<p align="left">
-<a href="https://linkedin.com/in/nischay-kademane" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="nischay-kademane" height="30" width="40" /></a>
-<a href="https://twitter.com/nischay_k" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="nischay_k" height="30" width="40" /></a>
-<a href="mailto:nischay@example.com" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/envelope.svg" alt="nischay-k" height="30" width="40" /></a>
+<p align="center">
+  <a href="https://linkedin.com/in/nischay-kademane" target="_blank">
+    <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/godnix7" target="_blank">
+    <img src="https://skillicons.dev/icons?i=github" alt="GitHub" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://twitter.com/nischay_k" target="_blank">
+    <img src="https://skillicons.dev/icons?i=twitter" alt="Twitter" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="mailto:nischaykademane2006@gmail.com" target="_blank">
+    <img src="https://skillicons.dev/icons?i=gmail" alt="Gmail" />
+  </a>
 </p>
 
 ---

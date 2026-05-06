@@ -25,23 +25,35 @@
 
 ### 🛠️ Featured Architecture
 
-#### [RestroOps](https://github.com/nischay-k/restro-ops)
-> **Enterprise-grade Multi-tenant SaaS**
-> - Scalable microservices architecture.
-> - Real-time analytics and inventory management.
-> - High-performance PostgreSQL optimization.
-
-#### [MediLocker](https://github.com/nischay-k/medilocker)
+#### [MediLocker](https://github.com/godnix7/MediLocker) | [Live Demo](https://bwai-obsidian-logic.vercel.app)
 > **Zero-Trust Healthcare Record Sovereignty**
-> - Advanced encryption protocols for sensitive data.
-> - Decentralized identity verification.
-> - Secure API gateways for healthcare providers.
+> - Medical-based safe vault and centralized hospital management.
+> - Secure document storage with FastAPI and PostgreSQL.
+> - Real-time QR scanning and AWS S3 integration.
 
-#### [LocalMusic](https://github.com/nischay-k/local-music)
+#### [Lynxis AI](https://github.com/godnix7/Lynxis) | [Live Demo](https://lynxis.vercel.app)
+> **Multi-Agent Code Intelligence Platform**
+> - Advanced analysis and interaction with codebases using multiple AI agents.
+> - Interactive 3D visualization with Three.js.
+> - Orchestrated via Anthropic AI and Node.js.
+
+#### [EventByte](https://github.com/godnix7/EventByte) | [Live Demo](https://event-byte.vercel.app)
+> **Enterprise Hackathon Management**
+> - Real-time judging and event tracking for high-scale competitions.
+> - Built with Django, TypeScript, and Socket.io for low-latency updates.
+> - Integrated scoring systems and participant management.
+
+#### [LocalMusic](https://github.com/godnix7/LocalMusic) | [Live Demo](https://localmusic-three.vercel.app)
 > **Distributed Audio Streaming Pipeline**
-> - Low-latency audio processing using Go.
-> - High-throughput data ingestion via Redis.
-> - Custom DSP (Digital Signal Processing) modules.
+> - High-performance personal music player with admin-controlled subscriptions.
+> - Real-time search powered by Elasticsearch and Redis.
+> - Low-latency streaming via Fastify and WebSockets.
+
+#### [Althea](https://github.com/godnix7/Althea) | [Live Demo](https://althea-gamma.vercel.app)
+> **AI-Driven Emotional Support System**
+> - Mental Health Chatbot focused on day-to-day emotional well-being.
+> - Natural Language Processing integration for intelligent responses.
+> - Lightweight and scalable architecture deployed on Vercel.
 
 ---
 

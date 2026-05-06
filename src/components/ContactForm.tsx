@@ -12,7 +12,7 @@ export default function ContactForm() {
     setStatus("sending");
 
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "nischaykademane2006@gmail.com"); // The user will need to put their key here or I can use a generic one if I had it.
+    formData.append("access_key", "153e8ed9-09b3-4928-8336-6cbbdcc5d916");
 
     try {
       // Using Web3Forms for easy, no-backend email handling

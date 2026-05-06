@@ -111,7 +111,7 @@ export default function ClientExperience({ envVars }: { envVars: Record<string, 
               <Environment preset="city" />
               <fog attach="fog" args={["#fbfbfb", 10, 30]} />
 
-              <EffectComposer disableNormalPass>
+              <EffectComposer>
                 <Bloom luminanceThreshold={0.9} mipmapBlur intensity={0.5} radius={0.5} />
                 <ChromaticAberration offset={new THREE.Vector2(0.0003, 0.0003)} />
                 <Noise opacity={0.02} />

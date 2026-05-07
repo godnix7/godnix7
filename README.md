@@ -31,7 +31,7 @@
 
 ### 🛠️ Featured Architecture
 
-#### [MediLocker](https://github.com/godnix7/MediLocker) | [Live Demo](https://bwai-obsidian-logic.vercel.app)
+#### [MediLocker](https://github.com/godnix7/MediLocker) | [Live Demo](https://medilocker-main.vercel.app/)
 > **Zero-Trust Healthcare Record Sovereignty**
 > - Medical-based safe vault and centralized hospital management.
 > - Secure document storage with FastAPI and PostgreSQL.

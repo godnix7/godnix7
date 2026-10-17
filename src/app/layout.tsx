@@ -1,28 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+const sans = Bricolage_Grotesque({ variable: "--font-sans", subsets: ["latin"] });
+const serif = Instrument_Serif({ variable: "--font-serif", subsets: ["latin"], weight: "400", style: ["normal", "italic"] });
+const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nischay Kademane — Experience Architect",
-  description: "A cinematic digital experience by Nischay Kademane.",
+  title: "Nischay Kademane — Backend & AI engineer",
+  description: "Portfolio of Nischay Kademane: backend systems, AI products and interactive web experiences.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`}>
-      <body className="font-sans bg-background text-foreground">
-        <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] noise-bg" />
-        {children}
-      </body>
+    <html lang="en" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,88 +1,51 @@
-# ◈ NISCHAY KADEMANE | PORTFOLIO
+# Nischay Kademane — Portfolio
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Laptop.png" alt="Laptop" width="100" height="100" />
-</p>
+Backend & AI engineer from Bengaluru. This is the source of my portfolio: **[godnix7.vercel.app](https://godnix7.vercel.app/)**
 
-<h3 align="center">Software Architecture & Engineering</h3>
+An interactive, scroll-driven site with a real-time 3D particle background that reacts to the cursor and morphs (sphere → knot → wave) as you scroll. Project data is kept in sync with my GitHub account.
 
-<p align="center">
-  <i>"Architecting digital environments where performance and aesthetics collide."</i>
-</p>
+## Highlights
 
-<p align="center">
-  <a href="https://godnix7.vercel.app/" target="_blank">
-    <img src="https://img.shields.io/badge/Live%20Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Portfolio" />
-  </a>
-</p>
+- **Interactive 3D background:** ~26k GPU particles in a custom GLSL shader (React Three Fiber). Cursor repels particles; scroll drives the shape morph.
+- **Live GitHub data:** repo stars, languages, last-push times, follower and repo counts are fetched from the GitHub API at build time and revalidated hourly (falls back gracefully if the API is unreachable).
+- **Considered motion:** Lenis smooth scrolling, Framer Motion reveals, a custom cursor, a ticker, accordion project rows.
+- **Contact form** via Web3Forms, no backend required.
 
----
+## Featured projects
 
-### 🚀 Technical Arsenal
+| Project | What it is | Stack |
+| :-- | :-- | :-- |
+| [MediLocker](https://github.com/godnix7/MediLocker) · [live](https://medilocker-main.vercel.app/) | Zero-trust medical vault & hospital system | FastAPI, PostgreSQL, S3, Redis |
+| [Lynxis](https://github.com/godnix7/Lynxis) · [live](https://lynxis.vercel.app) | Multi-agent code intelligence | Node.js, Prisma, Three.js, Anthropic |
+| [EventByte](https://github.com/godnix7/EventByte) · [live](https://event-byte.vercel.app) | Real-time hackathon judging | Django, TypeScript, Socket.io |
+| [Deepfake-detection](https://github.com/godnix7/Deepfake-detection) | AI-generated video detection | Python |
+| [RestoOps](https://github.com/godnix7/RestoOPs) | AI platform for restaurants | JavaScript |
+| [LocalMusic](https://github.com/godnix7/LocalMusic) · [live](https://localmusic-three.vercel.app) | Music streaming platform | Fastify, Elasticsearch, Redis |
+| [Althea](https://github.com/godnix7/Althea) · [live](https://althea-gamma.vercel.app) | Mental-health chatbot | Python, NLP |
+| [Harvest Club](https://github.com/godnix7/harvest-club) · [live](https://harvestclub.vercel.app) | Community platform | TypeScript |
+| [SIH Internal](https://github.com/godnix7/SIH-Internal) · [live](https://sih-internal-two.vercel.app) | Smart India Hackathon build | TypeScript |
 
-| Category | Technologies |
-| :--- | :--- |
-| **Languages** | TypeScript, Python, Go, Java |
-| **Frontend** | React, Next.js, Three.js, Framer Motion, GSAP |
-| **Backend** | Node.js, FastAPI, PostgreSQL, Redis |
-| **DevOps** | Docker, Kubernetes, AWS, CI/CD Pipelines |
+## Tech
 
----
+Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · Three.js / React Three Fiber · Framer Motion · Lenis
 
-### 🛠️ Featured Architecture
+## Run locally
 
-#### [MediLocker](https://github.com/godnix7/MediLocker) | [Live Demo](https://medilocker-main.vercel.app/)
-> **Zero-Trust Healthcare Record Sovereignty**
-> - Medical-based safe vault and centralized hospital management.
-> - Secure document storage with FastAPI and PostgreSQL.
-> - Real-time QR scanning and AWS S3 integration.
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+```
 
-#### [Lynxis AI](https://github.com/godnix7/Lynxis) | [Live Demo](https://lynxis.vercel.app)
-> **Multi-Agent Code Intelligence Platform**
-> - Advanced analysis and interaction with codebases using multiple AI agents.
-> - Interactive 3D visualization with Three.js.
-> - Orchestrated via Anthropic AI and Node.js.
+Next.js 16 has breaking changes vs. older versions; see `node_modules/next/dist/docs/` before changing framework-level code.
 
-#### [EventByte](https://github.com/godnix7/EventByte) | [Live Demo](https://event-byte.vercel.app)
-> **Enterprise Hackathon Management**
-> - Real-time judging and event tracking for high-scale competitions.
-> - Built with Django, TypeScript, and Socket.io for low-latency updates.
-> - Integrated scoring systems and participant management.
+## Editing content
 
-#### [LocalMusic](https://github.com/godnix7/LocalMusic) | [Live Demo](https://localmusic-three.vercel.app)
-> **Distributed Audio Streaming Pipeline**
-> - High-performance personal music player with admin-controlled subscriptions.
-> - Real-time search powered by Elasticsearch and Redis.
-> - Low-latency streaming via Fastify and WebSockets.
+- Projects, copy and tech lists: `src/lib/data.ts`
+- GitHub sync: `src/lib/github.ts`
+- 3D scene: `src/components/Scene.tsx`
+- Page layout: `src/components/Experience.tsx`
 
-#### [Althea](https://github.com/godnix7/Althea) | [Live Demo](https://althea-gamma.vercel.app)
-> **AI-Driven Emotional Support System**
-> - Mental Health Chatbot focused on day-to-day emotional well-being.
-> - Natural Language Processing integration for intelligent responses.
-> - Lightweight and scalable architecture deployed on Vercel.
+## Connect
 
-### 📬 Connect With Me
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/nischaykademane/" target="_blank">
-    <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://github.com/godnix7" target="_blank">
-    <img src="https://skillicons.dev/icons?i=github" alt="GitHub" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://x.com/NISCHAYKADEMANE" target="_blank">
-    <img src="https://skillicons.dev/icons?i=x" alt="X" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="mailto:nischaykademane2006@gmail.com" target="_blank">
-    <img src="https://skillicons.dev/icons?i=gmail" alt="Gmail" />
-  </a>
-</p>
-
----
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer" />
-</p>
+[GitHub](https://github.com/godnix7) · [LinkedIn](https://www.linkedin.com/in/nischaykademane/) · [X](https://x.com/NISCHAYKADEMANE) · [Email](mailto:nischaykademane2006@gmail.com)

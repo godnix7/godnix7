@@ -52,8 +52,8 @@ export default function Experience({ gh }: { gh: GitHubSnapshot }) {
       <Scene />
       <Cursor />
 
-      <header className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 md:px-12 py-6 mix-blend-difference">
-        <a href="#top" className="mono text-xs tracking-[0.25em] uppercase">nk<span className="text-ember">/</span>2026</a>
+      <header className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 md:px-12 py-6 mix-blend-normal">
+        <a href="#top" className="mono text-xs tracking-[0.25em] uppercase">nk<span className="text-ember">*</span>v2</a>
         <nav className="flex gap-6 md:gap-10">
           {nav.map(([l, id]) => (
             <a key={id} href={`#${id}`} className="label !text-bone hover:!text-ember transition-colors">{l}</a>

@@ -35,7 +35,7 @@ export default function ContactForm() {
       <input required name="name" placeholder="Your name" className={field} />
       <input required name="email" type="email" placeholder="Email" className={field} />
       <textarea required name="message" rows={3} placeholder="What are we building?" className={`${field} resize-none`} />
-      <button disabled={status === "sending"} className="rounded-full bg-ember text-ink px-8 py-3 font-medium hover:bg-bone transition-colors disabled:opacity-50">
+      <button disabled={status === "sending"} className="rounded-full bg-ember text-white px-8 py-3 font-medium hover:bg-bone transition-colors disabled:opacity-50">
         {status === "sending" ? "Sending…" : "Send message →"}
       </button>
       {status === "error" && <p className="mono text-xs text-ember">Couldn&apos;t send. Try emailing me directly.</p>}

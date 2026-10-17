@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-const field = "w-full bg-transparent border-b border-bone/25 py-3 text-lg outline-none focus:border-ember transition-colors placeholder:text-sand/50";
+const field =
+  "w-full bg-card border border-line rounded-lg px-4 py-3 text-[15px] outline-none focus:border-accent focus:ring-4 focus:ring-accent/10 transition placeholder:text-muted/60";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -23,22 +24,36 @@ export default function ContactForm() {
 
   if (status === "success")
     return (
-      <div className="py-6">
-        <p className="serif text-5xl text-ember">Thank you.</p>
-        <p className="mt-3 text-bone/80">Message received — I&apos;ll reply soon.</p>
-        <button onClick={() => setStatus("idle")} className="label mt-6 hover:!text-ember">Send another</button>
+      <div className="rounded-xl border border-line bg-card p-8">
+        <p className="text-2xl font-semibold">Message sent</p>
+        <p className="mt-2 text-muted">Thanks for reaching out. I&apos;ll reply as soon as I can.</p>
+        <button onClick={() => setStatus("idle")} className="mt-5 text-sm text-accent font-medium hover:underline">Send another</button>
       </div>
     );
 
   return (
-    <form onSubmit={submit} className="space-y-7">
-      <input required name="name" placeholder="Your name" className={field} />
-      <input required name="email" type="email" placeholder="Email" className={field} />
-      <textarea required name="message" rows={3} placeholder="What are we building?" className={`${field} resize-none`} />
-      <button disabled={status === "sending"} className="rounded-full bg-ember text-white px-8 py-3 font-medium hover:bg-bone transition-colors disabled:opacity-50">
-        {status === "sending" ? "Sending…" : "Send message →"}
+    <form onSubmit={submit} className="space-y-4">
+      <div className="grid sm:grid-cols-2 gap-4">
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-medium">Name</span>
+          <input required name="name" placeholder="Jane Doe" className={field} />
+        </label>
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-medium">Email</span>
+          <input required name="email" type="email" placeholder="jane@company.com" className={field} />
+        </label>
+      </div>
+      <label className="block">
+        <span className="mb-1.5 block text-sm font-medium">Message</span>
+        <textarea required name="message" rows={5} placeholder="Tell me about the project or role…" className={`${field} resize-none`} />
+      </label>
+      <button
+        disabled={status === "sending"}
+        className="rounded-lg bg-ink text-paper px-6 py-3 text-sm font-semibold hover:bg-accent transition-colors disabled:opacity-50"
+      >
+        {status === "sending" ? "Sending…" : "Send message"}
       </button>
-      {status === "error" && <p className="mono text-xs text-ember">Couldn&apos;t send. Try emailing me directly.</p>}
+      {status === "error" && <p className="text-sm text-red-700">Couldn&apos;t send. Please email me directly instead.</p>}
     </form>
   );
 }

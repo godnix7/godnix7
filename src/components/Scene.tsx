@@ -4,80 +4,90 @@ import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const COUNT = 34;
-const PALETTE = ["#111110", "#ff2e7e", "#ffffff", "#111110", "#ff2e7e"];
+/* Fixed, low-contrast 3D terrain of points that ripples around the cursor and
+   tilts with scroll. It sits behind the page content. */
+const SIDE = 150;
 
-type Item = { base: THREE.Vector3; kind: number; color: string; scale: number; spin: THREE.Vector3 };
+const vert = /* glsl */ `
+  uniform float uTime, uPx;
+  uniform vec2 uMouse;
+  varying float vH, vF;
+  void main(){
+    vec3 p = position;
+    float h = sin(p.x*.55 + uTime*.5)*.35 + cos(p.z*.5 + uTime*.4)*.35;
+    float d = distance(p.xz, uMouse);
+    float f = smoothstep(4.5, 0., d);
+    h += f * (1.2 + .5*sin(d*3. - uTime*4.));
+    p.y = h;
+    vec4 mv = modelViewMatrix * vec4(p,1.);
+    gl_Position = projectionMatrix * mv;
+    gl_PointSize = (1.4 + f*3.) * uPx * (14. / -mv.z);
+    vH = h; vF = f;
+  }`;
+const frag = /* glsl */ `
+  varying float vH, vF;
+  void main(){
+    float d = length(gl_PointCoord-.5);
+    if(d>.5) discard;
+    vec3 teal = vec3(.055,.42,.36), warm = vec3(.79,.51,.17);
+    vec3 c = mix(teal, warm, smoothstep(.2,1.,vF));
+    gl_FragColor = vec4(c, .55 + vF*.4);
+  }`;
 
-function Shapes() {
-  const group = useRef<THREE.Group>(null);
-  const meshes = useRef<(THREE.Mesh | null)[]>([]);
-  const items = useMemo<Item[]>(
-    () =>
-      Array.from({ length: COUNT }, (_, i) => ({
-        base: new THREE.Vector3((Math.random() - 0.5) * 13, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 6 - 1),
-        kind: i % 4,
-        color: PALETTE[i % PALETTE.length],
-        scale: 0.25 + Math.random() * 0.55,
-        spin: new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5),
-      })),
-    []
-  );
-  const vel = useMemo(() => items.map(() => new THREE.Vector3()), [items]);
-  const off = useMemo(() => items.map(() => new THREE.Vector3()), [items]);
+function Terrain() {
+  const mat = useRef<THREE.ShaderMaterial>(null);
+  const grp = useRef<THREE.Group>(null);
+  const positions = useMemo(() => {
+    const a = new Float32Array(SIDE * SIDE * 3);
+    for (let i = 0; i < SIDE; i++)
+      for (let j = 0; j < SIDE; j++) a.set([(i - SIDE / 2) * 0.28, 0, (j - SIDE / 2) * 0.28], (i * SIDE + j) * 3);
+    return a;
+  }, []);
+  const uniforms = useMemo(() => ({ uTime: { value: 0 }, uPx: { value: 1 }, uMouse: { value: new THREE.Vector2(99, 99) } }), []);
+  const ray = useMemo(() => new THREE.Raycaster(), []);
+  const plane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), []);
+  const hit = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state, dt) => {
+    const u = mat.current!.uniforms;
+    u.uTime.value += dt;
+    u.uPx.value = state.gl.getPixelRatio();
     const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     const prog = Math.min(1, window.scrollY / max);
-    const g = group.current!;
-    g.rotation.y += (prog * Math.PI * 1.5 - g.rotation.y) * Math.min(1, dt * 2);
-    g.position.y += (prog * 3 - g.position.y) * Math.min(1, dt * 2);
+    const g = grp.current!;
+    g.rotation.y += (prog * 0.9 - g.rotation.y) * Math.min(1, dt * 2);
     g.updateMatrixWorld();
-    const mouse = new THREE.Vector3(state.pointer.x * 6, state.pointer.y * 3.6, 0);
-    const t = state.clock.elapsedTime;
-    items.forEach((it, i) => {
-      const m = meshes.current[i];
-      if (!m) return;
-      const world = it.base.clone().add(off[i]);
-      world.y += Math.sin(t * 0.6 + i) * 0.25;
-      const wp = world.clone().applyMatrix4(g.matrixWorld);
-      const d = wp.clone().sub(mouse);
-      d.z = 0;
-      const dist = d.length();
-      if (dist < 2.6) vel[i].add(d.normalize().multiplyScalar((2.6 - dist) * dt * 9));
-      vel[i].multiplyScalar(0.92);
-      off[i].add(vel[i].clone().multiplyScalar(dt * 6));
-      off[i].multiplyScalar(0.985);
-      m.position.copy(world);
-      m.rotation.x += it.spin.x * dt + vel[i].y * 0.3;
-      m.rotation.y += it.spin.y * dt + vel[i].x * 0.3;
-      m.rotation.z += it.spin.z * dt;
-    });
+    ray.setFromCamera(state.pointer, state.camera);
+    const inv = new THREE.Plane().copy(plane).applyMatrix4(g.matrixWorld);
+    if (ray.ray.intersectPlane(inv, hit)) {
+      const local = g.worldToLocal(hit.clone());
+      u.uMouse.value.lerp(new THREE.Vector2(local.x, local.z), Math.min(1, dt * 6));
+    }
   });
 
   return (
-    <group ref={group}>
-      {items.map((it, i) => (
-        <mesh key={i} ref={(el) => { meshes.current[i] = el; }} scale={it.scale}>
-          {it.kind === 0 && <torusGeometry args={[1, 0.38, 20, 48]} />}
-          {it.kind === 1 && <icosahedronGeometry args={[1, 0]} />}
-          {it.kind === 2 && <octahedronGeometry args={[1.1, 0]} />}
-          {it.kind === 3 && <torusKnotGeometry args={[0.8, 0.28, 64, 12]} />}
-          <meshStandardMaterial color={it.color} roughness={0.28} metalness={it.color === "#ffffff" ? 0.0 : 0.35} flatShading={it.kind === 1 || it.kind === 2} />
-        </mesh>
-      ))}
+    <group ref={grp} position={[0, -3.2, -4]}>
+      <points frustumCulled={false}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        </bufferGeometry>
+        <shaderMaterial ref={mat} vertexShader={vert} fragmentShader={frag} uniforms={uniforms} transparent depthWrite={false} />
+      </points>
     </group>
   );
 }
 
 export default function Scene() {
   return (
-    <div className="fixed inset-0 z-0" aria-hidden>
-      <Canvas camera={{ position: [0, 0, 8], fov: 45 }} dpr={[1, 1.75]}>
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[4, 6, 5]} intensity={2.4} />
-        <pointLight position={[-6, -3, 3]} intensity={30} color="#ff2e7e" />
-        <Shapes />
+    <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden>
+      <Canvas
+        camera={{ position: [0, 2.2, 9], fov: 50 }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false }}
+        eventSource={typeof document !== "undefined" ? document.body : undefined}
+        eventPrefix="client"
+      >
+        <Terrain />
       </Canvas>
     </div>
   );

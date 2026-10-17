@@ -6,7 +6,7 @@ An interactive, scroll-driven site with a real-time 3D particle background that 
 
 ## Highlights
 
-- **Interactive 3D background:** ~26k GPU particles in a custom GLSL shader (React Three Fiber). Cursor repels particles; scroll drives the shape morph.
+- **Interactive 3D:** a fixed GLSL point-terrain that ripples under the cursor and rotates on scroll, plus a React Three Fiber hero object that follows the pointer.
 - **Live GitHub data:** repo stars, languages, last-push times, follower and repo counts are fetched from the GitHub API at build time and revalidated hourly (falls back gracefully if the API is unreachable).
 - **Considered motion:** Lenis smooth scrolling, Framer Motion reveals, a custom cursor, a ticker, accordion project rows.
 - **Contact form** via Web3Forms, no backend required.

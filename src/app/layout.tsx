@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const sans = Bricolage_Grotesque({ variable: "--font-sans", subsets: ["latin"] });
-const serif = Instrument_Serif({ variable: "--font-serif", subsets: ["latin"], weight: "400", style: ["normal", "italic"] });
+const sans = Manrope({ variable: "--font-sans", subsets: ["latin"] });
 const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nischay Kademane — Backend & AI engineer",
-  description: "Portfolio of Nischay Kademane: backend systems, AI products and interactive web experiences.",
+  title: "Nischay Kademane — Backend & AI Engineer",
+  description:
+    "Software engineer building secure backend systems, real-time platforms and AI products. Selected work, stack and open-source activity.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

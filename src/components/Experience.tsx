@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Lenis from "lenis";
 import { ArrowUpRight, Check, Code2, Mail, Star } from "lucide-react";
 import { profile, projects, stack } from "@/lib/data";
-import { capabilities, featured } from "@/lib/featured";
+import { capabilities, featured, shots } from "@/lib/featured";
 import type { GitHubSnapshot } from "@/lib/github";
 import ContactForm from "./ContactForm";
 import ProjectVisual from "./ProjectVisual";
@@ -167,7 +167,7 @@ export default function Experience({ gh }: { gh: GitHubSnapshot }) {
                 return (
                   <Reveal key={p.repo} className="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
                     <div className={`md:col-span-6 ${i % 2 ? "md:order-2" : ""}`}>
-                      <ProjectVisual title={p.title} tech={p.tech} index={i} />
+                      <ProjectVisual title={p.title} shot={shots[p.repo]} live={p.live} index={i} />
                     </div>
                     <div className={`md:col-span-6 ${i % 2 ? "md:order-1" : ""}`}>
                       <p className="mono text-xs uppercase tracking-widest text-accent">{f.role}</p>
@@ -209,9 +209,15 @@ export default function Experience({ gh }: { gh: GitHubSnapshot }) {
                   const stat = gh.repos[p.repo];
                   return (
                     <div key={p.repo} className="group grid grid-cols-12 gap-4 items-center py-5 hover:bg-card/70 transition-colors px-2 -mx-2 rounded">
-                      <div className="col-span-12 md:col-span-4">
-                        <p className="font-semibold">{p.title}</p>
-                        <p className="text-sm text-muted">{p.kicker}</p>
+                      <div className="col-span-12 md:col-span-4 flex items-center gap-4">
+                        {shots[p.repo] && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={shots[p.repo]} alt="" loading="lazy" className="h-12 w-[4.5rem] shrink-0 rounded-md border border-line object-cover object-top" />
+                        )}
+                        <div>
+                          <p className="font-semibold">{p.title}</p>
+                          <p className="text-sm text-muted">{p.kicker}</p>
+                        </div>
                       </div>
                       <p className="col-span-12 md:col-span-4 text-sm text-muted">{p.blurb}</p>
                       <p className="col-span-6 md:col-span-2 mono text-xs text-muted">{stat?.language ?? p.tech[0]}</p>

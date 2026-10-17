@@ -2,11 +2,11 @@
 
 Backend & AI engineer from Bengaluru. This is the source of my portfolio: **[godnix7.vercel.app](https://godnix7.vercel.app/)**
 
-A professional, case-study style site with interactive 3D (a terrain that ripples around the cursor, a 3D hero object and tilting project panels). Project data is kept in sync with my GitHub account.
+A professional, case-study style site with interactive 3D (a wireframe fabric that ripples around the cursor, a 3D hero object and tilting browser-frame project previews). Project data is kept in sync with my GitHub account.
 
 ## Highlights
 
-- **Interactive 3D:** a fixed GLSL point-terrain that ripples under the cursor and rotates on scroll, plus a React Three Fiber hero object that follows the pointer.
+- **Interactive 3D:** a fixed GLSL wireframe mesh that ripples under the cursor and rotates on scroll, plus a React Three Fiber hero object that follows the pointer.
 - **Live GitHub data:** repo stars, languages, last-push times, follower and repo counts are fetched from the GitHub API at build time and revalidated hourly (falls back gracefully if the API is unreachable).
 - **Considered motion:** Lenis smooth scrolling, Framer Motion reveals, 3D-tilting case-study panels and a clean, responsive layout.
 - **Contact form** via Web3Forms, no backend required.
@@ -19,11 +19,10 @@ A professional, case-study style site with interactive 3D (a terrain that ripple
 | [Lynxis](https://github.com/godnix7/Lynxis) · [live](https://lynxis.vercel.app) | Multi-agent code intelligence | Node.js, Prisma, Three.js, Anthropic |
 | [EventByte](https://github.com/godnix7/EventByte) · [live](https://event-byte.vercel.app) | Real-time hackathon judging | Django, TypeScript, Socket.io |
 | [Deepfake-detection](https://github.com/godnix7/Deepfake-detection) | AI-generated video detection | Python |
-| [RestoOps](https://github.com/godnix7/RestoOPs) | AI platform for restaurants | JavaScript |
 | [LocalMusic](https://github.com/godnix7/LocalMusic) · [live](https://localmusic-three.vercel.app) | Music streaming platform | Fastify, Elasticsearch, Redis |
 | [Althea](https://github.com/godnix7/Althea) · [live](https://althea-gamma.vercel.app) | Mental-health chatbot | Python, NLP |
 | [Harvest Club](https://github.com/godnix7/harvest-club) · [live](https://harvestclub.vercel.app) | Community platform | TypeScript |
-| [SIH Internal](https://github.com/godnix7/SIH-Internal) · [live](https://sih-internal-two.vercel.app) | Smart India Hackathon build | TypeScript |
+| [SIH Internal](https://github.com/godnix7/SIH-Internal) | Smart India Hackathon build | TypeScript |
 
 ## Tech
 

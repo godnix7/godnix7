@@ -26,7 +26,7 @@ function Core() {
       <Float speed={1.6} rotationIntensity={0.3} floatIntensity={0.6}>
         <mesh>
           <icosahedronGeometry args={[1.25, 12]} />
-          <MeshDistortMaterial color="#0e6b5c" distort={0.32} speed={1.6} roughness={0.25} metalness={0.15} />
+          <MeshDistortMaterial color="#c2410c" distort={0.32} speed={1.6} roughness={0.25} metalness={0.15} />
         </mesh>
         <mesh ref={lattice}>
           <icosahedronGeometry args={[1.85, 2]} />
@@ -35,7 +35,7 @@ function Core() {
         <group ref={rings}>
           <mesh rotation={[Math.PI / 2.4, 0, 0]}>
             <torusGeometry args={[2.35, 0.018, 12, 160]} />
-            <meshBasicMaterial color="#c9822b" />
+            <meshBasicMaterial color="#0e6b5c" />
           </mesh>
           <mesh rotation={[Math.PI / 3, Math.PI / 4, 0]}>
             <torusGeometry args={[2.7, 0.012, 12, 160]} />
@@ -43,7 +43,7 @@ function Core() {
           </mesh>
           <mesh position={[2.35, 0, 0]}>
             <sphereGeometry args={[0.09, 16, 16]} />
-            <meshBasicMaterial color="#c9822b" />
+            <meshBasicMaterial color="#0e6b5c" />
           </mesh>
         </group>
       </Float>
@@ -56,7 +56,7 @@ export default function HeroObject() {
     <Canvas camera={{ position: [0, 0, 7], fov: 40 }} dpr={[1, 2]} gl={{ alpha: true, antialias: true }}>
       <ambientLight intensity={0.9} />
       <directionalLight position={[4, 5, 6]} intensity={2.6} />
-      <pointLight position={[-5, -2, 3]} intensity={18} color="#c9822b" />
+      <pointLight position={[-5, -2, 3]} intensity={18} color="#0e6b5c" />
       <Core />
     </Canvas>
   );

@@ -56,13 +56,6 @@ export const projects: Project[] = [
     tech: ["Python", "Computer vision", "Deep learning"],
   },
   {
-    repo: "RestoOPs",
-    title: "RestoOps",
-    kicker: "Restaurant intelligence",
-    blurb: "An AI-powered enterprise platform built for the restaurant industry.",
-    tech: ["JavaScript", "AI", "Analytics"],
-  },
-  {
     repo: "LocalMusic",
     title: "LocalMusic",
     kicker: "Audio streaming",
@@ -93,7 +86,6 @@ export const projects: Project[] = [
     kicker: "Smart India Hackathon",
     blurb: "Internal-round build for Smart India Hackathon.",
     tech: ["TypeScript", "Next.js"],
-    live: "https://sih-internal-two.vercel.app",
   },
 ];
 

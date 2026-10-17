@@ -40,3 +40,13 @@ export const capabilities = [
     text: "Fast React and Next.js interfaces with real-time data, motion and 3D where it helps the product.",
   },
 ];
+
+// Real screenshots of the live sites (public/shots), keyed by repo name.
+export const shots: Record<string, string> = {
+  MediLocker: "/shots/medilocker.png",
+  Lynxis: "/shots/lynxis.png",
+  EventByte: "/shots/eventbyte.png",
+  LocalMusic: "/shots/localmusic.png",
+  Althea: "/shots/althea.png",
+  "harvest-club": "/shots/harvest.png",
+};

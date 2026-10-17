@@ -1,50 +1,51 @@
-# Nischay Kademane — Portfolio
+# Hi, I'm Nischay Kademane 👋
 
-Backend & AI engineer from Bengaluru. This is the source of my portfolio: **[godnix7.vercel.app](https://godnix7.vercel.app/)**
+**Backend & AI engineer from Bengaluru, India.** I build secure APIs, real-time platforms and AI products, and ship them end to end.
 
-A professional, case-study style site with interactive 3D (a point-cloud terrain that ripples around the cursor and tilting browser-frame project previews). Project data is kept in sync with my GitHub account.
+[![Portfolio](https://img.shields.io/badge/Portfolio-godnix7.vercel.app-0f1b2d?style=for-the-badge&logo=vercel&logoColor=white)](https://godnix7.vercel.app/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-nischaykademane-0f1b2d?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nischaykademane/)
+[![X](https://img.shields.io/badge/X-@NISCHAYKADEMANE-0f1b2d?style=for-the-badge&logo=x&logoColor=white)](https://x.com/NISCHAYKADEMANE)
+[![Email](https://img.shields.io/badge/Email-Get%20in%20touch-c2620a?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nischaykademane2006@gmail.com)
 
-## Highlights
+## About me
 
-- **Interactive 3D:** a fixed GLSL point terrain (React Three Fiber) that ripples under the cursor and rotates on scroll.
-- **Live GitHub data:** repo stars, languages, last-push times, follower and repo counts are fetched from the GitHub API at build time and revalidated hourly (falls back gracefully if the API is unreachable).
-- **Considered motion:** Lenis smooth scrolling, Framer Motion reveals, 3D-tilting case-study panels and a clean, responsive layout.
-- **Contact form** via Web3Forms, no backend required.
+- 🧱 I like problems where reliability, security and speed all matter at once: health records, real-time judging, streaming, video forensics.
+- 🤖 Currently building AI products: multi-agent workflows, NLP chatbots and deepfake detection.
+- 🏆 Hackathon builder at heart. Most of my projects started as a weekend build and kept growing.
+- 🌱 Always sharpening my backend architecture and applied-AI skills.
+- 📫 Open to roles, internships and freelance work. Say hi!
+
+## Tech I work with
+
+![Languages](https://skillicons.dev/icons?i=ts,py,js,java,go&theme=light)
+
+![Backend](https://skillicons.dev/icons?i=fastapi,django,nodejs,express,flask&theme=light)
+
+![Frontend](https://skillicons.dev/icons?i=react,nextjs,threejs,tailwind&theme=light)
+
+![Data and infra](https://skillicons.dev/icons?i=postgres,redis,elasticsearch,docker,aws,vercel,git&theme=light)
 
 ## Featured projects
 
 | Project | What it is | Stack |
 | :-- | :-- | :-- |
-| [MediLocker](https://github.com/godnix7/MediLocker) · [live](https://medilocker-main.vercel.app/) | Zero-trust medical vault & hospital system | FastAPI, PostgreSQL, S3, Redis |
-| [Lynxis](https://github.com/godnix7/Lynxis) · [live](https://lynxis.vercel.app) | Multi-agent code intelligence | Node.js, Prisma, Three.js, Anthropic |
-| [EventByte](https://github.com/godnix7/EventByte) · [live](https://event-byte.vercel.app) | Real-time hackathon judging | Django, TypeScript, Socket.io |
-| [Deepfake-detection](https://github.com/godnix7/Deepfake-detection) | AI-generated video detection | Python |
-| [LocalMusic](https://github.com/godnix7/LocalMusic) · [live](https://localmusic-three.vercel.app) | Music streaming platform | Fastify, Elasticsearch, Redis |
-| [Althea](https://github.com/godnix7/Althea) · [live](https://althea-gamma.vercel.app) | Mental-health chatbot | Python, NLP |
-| [Harvest Club](https://github.com/godnix7/harvest-club) · [live](https://harvestclub.vercel.app) | Community platform | TypeScript |
-| [SIH Internal](https://github.com/godnix7/SIH-Internal) | Smart India Hackathon build | TypeScript |
+| 🏥 [**MediLocker**](https://github.com/godnix7/MediLocker) · [live](https://medilocker-main.vercel.app/) | Zero-trust medical vault and centralized hospital system with QR-based record sharing | FastAPI, PostgreSQL, S3, Redis |
+| 🧠 [**Lynxis**](https://github.com/godnix7/Lynxis) · [live](https://lynxis.vercel.app) | Multi-agent AI code intelligence with 3D repo visualization | Node.js, Prisma, Three.js, Anthropic |
+| 🎯 [**EventByte**](https://github.com/godnix7/EventByte) · [live](https://event-byte.vercel.app) | Real-time hackathon judging and event management | Django, TypeScript, Socket.io |
+| 🎬 [**Deepfake Detection**](https://github.com/godnix7/Deepfake-detection) | Detects and classifies AI-generated deepfake videos | Python |
+| 🎵 [**LocalMusic**](https://github.com/godnix7/LocalMusic) · [live](https://localmusic-three.vercel.app) | Music streaming platform with admin-controlled subscriptions and fast search | Fastify, Elasticsearch, Redis |
+| 💬 [**Althea**](https://github.com/godnix7/Althea) · [live](https://althea-gamma.vercel.app) | Mental-health chatbot for day-to-day life | Python, NLP |
+| 🌾 [**Harvest Club**](https://github.com/godnix7/harvest-club) · [live](https://harvestclub.vercel.app) | Website for a student agritech community | TypeScript, Next.js |
 
-## Tech
+More on my [portfolio](https://godnix7.vercel.app/) or [all repositories](https://github.com/godnix7?tab=repositories).
 
-Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · Three.js / React Three Fiber · Framer Motion · Lenis
+## GitHub
 
-## Run locally
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=godnix7&show_icons=true&hide_border=true" alt="GitHub stats" height="150" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=godnix7&layout=compact&hide_border=true" alt="Top languages" height="150" />
+</p>
 
-```bash
-npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build
-```
+## Let's connect
 
-Next.js 16 has breaking changes vs. older versions; see `node_modules/next/dist/docs/` before changing framework-level code.
-
-## Editing content
-
-- Projects, copy and tech lists: `src/lib/data.ts`
-- GitHub sync: `src/lib/github.ts`
-- 3D scene: `src/components/Scene.tsx`
-- Page layout: `src/components/Experience.tsx`
-
-## Connect
-
-[GitHub](https://github.com/godnix7) · [LinkedIn](https://www.linkedin.com/in/nischaykademane/) · [X](https://x.com/NISCHAYKADEMANE) · [Email](mailto:nischaykademane2006@gmail.com)
+[Portfolio](https://godnix7.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/nischaykademane/) · [X](https://x.com/NISCHAYKADEMANE) · [nischaykademane2006@gmail.com](mailto:nischaykademane2006@gmail.com)

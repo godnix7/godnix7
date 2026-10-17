@@ -3,12 +3,12 @@
 :root {
   --paper: #f5f3ee;
   --card: #fbfaf7;
-  --ink: #14171a;
-  --muted: #5e646b;
+  --ink: #0f1b2d;
+  --muted: #566070;
   --line: #dcd8cf;
-  --accent: #c2410c;
-  --accent-soft: #fbe3d6;
-  --warm: #0e6b5c;
+  --accent: #c2620a;
+  --accent-soft: #fbe8cf;
+  --warm: #f0a24a;
 }
 
 @theme inline {

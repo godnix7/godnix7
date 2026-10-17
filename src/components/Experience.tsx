@@ -12,7 +12,6 @@ import ContactForm from "./ContactForm";
 import ProjectVisual from "./ProjectVisual";
 
 const Scene = dynamic(() => import("./Scene"), { ssr: false });
-const HeroObject = dynamic(() => import("./HeroObject"), { ssr: false });
 
 const nav = [
   ["Work", "work"],
@@ -145,14 +144,23 @@ export default function Experience({ gh }: { gh: GitHubSnapshot }) {
             </dl>
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="relative aspect-square w-full max-w-[460px] mx-auto">
-              <HeroObject />
-              <p className="absolute -bottom-2 inset-x-0 text-center mono text-[11px] tracking-widest uppercase text-muted">
-                Interactive · move your cursor
-              </p>
-            </div>
-          </div>
+          <Reveal delay={0.2} className="lg:col-span-5">
+            <p className="eyebrow mb-6">At a glance</p>
+            <dl className="divide-y divide-line border-y border-line">
+              {[
+                ["Based in", "Bengaluru, India"],
+                ["Focus", "Backend systems · AI products"],
+                ["Core stack", "TypeScript, Python, FastAPI, Next.js"],
+                ["Data & infra", "PostgreSQL, Redis, Docker, AWS"],
+                ["Currently", "Open to roles & collaborations"],
+              ].map(([k, v]) => (
+                <div key={k} className="flex items-baseline justify-between gap-6 py-4">
+                  <dt className="mono text-xs uppercase tracking-widest text-muted">{k}</dt>
+                  <dd className="text-right font-medium">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </section>
 
         {/* WORK */}

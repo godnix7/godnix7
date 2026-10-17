@@ -2,13 +2,13 @@
 
 Backend & AI engineer from Bengaluru. This is the source of my portfolio: **[godnix7.vercel.app](https://godnix7.vercel.app/)**
 
-An interactive, scroll-driven site with a real-time 3D particle background that reacts to the cursor and morphs (sphere → knot → wave) as you scroll. Project data is kept in sync with my GitHub account.
+A professional, case-study style site with interactive 3D (a terrain that ripples around the cursor, a 3D hero object and tilting project panels). Project data is kept in sync with my GitHub account.
 
 ## Highlights
 
 - **Interactive 3D:** a fixed GLSL point-terrain that ripples under the cursor and rotates on scroll, plus a React Three Fiber hero object that follows the pointer.
 - **Live GitHub data:** repo stars, languages, last-push times, follower and repo counts are fetched from the GitHub API at build time and revalidated hourly (falls back gracefully if the API is unreachable).
-- **Considered motion:** Lenis smooth scrolling, Framer Motion reveals, a custom cursor, a ticker, accordion project rows.
+- **Considered motion:** Lenis smooth scrolling, Framer Motion reveals, 3D-tilting case-study panels and a clean, responsive layout.
 - **Contact form** via Web3Forms, no backend required.
 
 ## Featured projects
@@ -43,7 +43,7 @@ Next.js 16 has breaking changes vs. older versions; see `node_modules/next/dist/
 
 - Projects, copy and tech lists: `src/lib/data.ts`
 - GitHub sync: `src/lib/github.ts`
-- 3D scene: `src/components/Scene.tsx`
+- 3D scene: `src/components/Scene.tsx` (background) and `HeroObject.tsx`
 - Page layout: `src/components/Experience.tsx`
 
 ## Connect

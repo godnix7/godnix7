@@ -27,7 +27,7 @@ export default function ProjectVisual({
       ref={ref}
       className="tilt relative rounded-xl bg-white overflow-hidden border border-line shadow-[0_40px_70px_-30px_rgba(20,23,26,.55)]"
     >
-      <div className="flex items-center gap-2 px-4 h-10 bg-[#ebe8e1] border-b border-line">
+      <div className="flex items-center gap-2 px-4 h-10 bg-[#eef1f6] border-b border-line">
         <span className="h-2.5 w-2.5 rounded-full bg-[#ec6a5e]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#f4bf4f]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#61c554]" />

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, BookOpen, Code2, ExternalLink, Presentation } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import { getProjectBySlug } from "@/lib/projects";
+import { ArrowUpRight, BookOpen, Code2, ExternalLink, Presentation } from "lucide-react";
+import { HubFooter, HubNav } from "@/components/hub/HubChrome";
 import MotionSenseDemo from "@/components/demos/MotionSenseDemo";
 import UniMonitorTerminal from "@/components/demos/UniMonitorTerminal";
+import { getProjectBySlug } from "@/lib/projects";
 
 export const dynamic = "force-dynamic";
 
@@ -38,75 +37,75 @@ export default async function ProjectPage({ params }: Props) {
   const demoUrl = safeHttpsUrl(project.demoUrl);
   const docsUrl = safeHttpsUrl(project.documentationUrl);
   const presentationUrl = safeHttpsUrl(project.presentationUrl);
-  const thumbnailUrl = project.thumbnailUrl.startsWith("/") && !project.thumbnailUrl.startsWith("//")
-    ? project.thumbnailUrl
-    : safeHttpsUrl(project.thumbnailUrl);
-  const presentationPath = presentationUrl ? new URL(presentationUrl).pathname.toLowerCase() : "";
-  const presentationSource = presentationPath.endsWith(".pptx")
-    ? `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(presentationUrl)}&wdAr=1.7777777778`
+  const thumbnailUrl = project.thumbnailUrl.startsWith("/") && !project.thumbnailUrl.startsWith("//") ? project.thumbnailUrl : safeHttpsUrl(project.thumbnailUrl);
+  const presentationSource = presentationUrl && new URL(presentationUrl).pathname.toLowerCase().endsWith(".pptx")
+    ? `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(presentationUrl)}`
     : presentationUrl;
+  const liveDemo = project.slug === "motionsense" || project.slug === "unimonitor";
 
   return (
-    <main className="project-detail-page">
-      <div className="ambient-grid" aria-hidden="true" />
-      <div className="film-grain" aria-hidden="true" />
-      <Navbar />
-      <article className="section-wrap subpage-main">
-        <div className="detail-top">
-          <Link className="detail-back" href="/#projects"><ArrowLeft size={14} /> Back to selected work</Link>
-          <span className="section-kicker">PROJECT / {project.slug.toUpperCase()}</span>
-        </div>
+    <div className="hub">
+      <HubNav />
+      <main className="h-wrap">
+        <nav className="h-crumbs" aria-label="Breadcrumb">
+          <Link href="/">Project Lab</Link> / <Link href="/projects">Projects</Link> / <span>{project.title}</span>
+        </nav>
 
-        {thumbnailUrl && <div className="detail-thumbnail"><Image src={thumbnailUrl} alt={`${project.title} project artwork`} fill sizes="(max-width: 720px) 100vw, 1000px" unoptimized /></div>}
-
-        <p className="detail-category" style={{ marginTop: project.thumbnailUrl ? 38 : 62 }}>{project.category}</p>
-        <h1 className="detail-title">{project.title}</h1>
-        <p className="detail-description">{project.description}</p>
-
-        <div className="detail-actions">
-          {repository && <a className="button button-quiet" href={repository} target="_blank" rel="noreferrer"><Code2 size={15} /> View source <ArrowUpRight size={13} /></a>}
-          {liveUrl && <a className="button button-primary" href={liveUrl} target="_blank" rel="noreferrer"><ExternalLink size={15} /> Open live project <ArrowUpRight size={13} /></a>}
-          {docsUrl && <a className="button button-quiet" href={docsUrl} target="_blank" rel="noreferrer"><BookOpen size={15} /> Documentation <ArrowUpRight size={13} /></a>}
-          {presentationUrl && <a className="button button-quiet" href={presentationUrl} target="_blank" rel="noreferrer"><Presentation size={15} /> Presentation <ArrowUpRight size={13} /></a>}
-        </div>
-
-        <div className="detail-meta">
-          <div className="detail-meta-block"><span className="detail-meta-label">Technology</span><div className="detail-tech">{project.tech.map((tech) => <span key={tech}>{tech}</span>)}</div></div>
-          <div className="detail-meta-block"><span className="detail-meta-label">Project notes</span><span className="subpage-intro">{project.featured ? "Featured work" : "Selected project"} · Updated {new Date(project.updatedAt).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}</span></div>
-        </div>
-
-        <div className="detail-story">{project.longDescription}</div>
-
-        {project.mediaUrls.length > 0 && (
-          <div className="detail-media-grid">
-            {project.mediaUrls.map((url, index) => {
-              const safeUrl = safeHttpsUrl(url);
-              return safeUrl ? <a key={safeUrl} href={safeUrl} target="_blank" rel="noreferrer" className="media-link">Media {String(index + 1).padStart(2, "0")} <ArrowUpRight size={14} /></a> : null;
-            })}
+        <header className="h-detail-head">
+          <div>
+            <span className="h-eyebrow">{project.category}</span>
+            <h1>{project.title}</h1>
+            <p>{project.description}</p>
           </div>
-        )}
-
-        {presentationUrl && (
-          <section className="presentation-wrap" aria-label={`${project.title} presentation`}>
-            <div className="presentation-heading"><div><span className="detail-meta-label">PRESENTATION / POWERPOINT</span><h2>Walk through the deck.</h2></div><a className="button button-quiet" href={presentationUrl} target="_blank" rel="noreferrer">Open or download <ArrowUpRight size={13} /></a></div>
-            <iframe className="presentation-frame" title={`${project.title} PowerPoint presentation`} src={presentationSource} loading="lazy" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowFullScreen referrerPolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads allow-presentation" />
-            <p className="presentation-note">The Office web viewer plays supported slide animations. For the closest PowerPoint animation and timing support, paste the official PowerPoint for the web embed URL; advanced effects and embedded media may still behave differently from desktop.</p>
-          </section>
-        )}
+          <div className="h-actions">
+            {liveUrl && <a className="h-btn h-btn-dark" href={liveUrl} target="_blank" rel="noreferrer"><ExternalLink size={15} /> Open website</a>}
+            {repository && <a className="h-btn h-btn-light" href={repository} target="_blank" rel="noreferrer"><Code2 size={15} /> Source code</a>}
+            {docsUrl && <a className="h-btn h-btn-light" href={docsUrl} target="_blank" rel="noreferrer"><BookOpen size={15} /> Docs</a>}
+            {presentationUrl && <a className="h-btn h-btn-light" href="#presentation"><Presentation size={15} /> Slides</a>}
+          </div>
+        </header>
 
         {project.slug === "motionsense" ? (
-          <MotionSenseDemo />
+          <div className="h-stage"><MotionSenseDemo /></div>
         ) : project.slug === "unimonitor" ? (
-          <UniMonitorTerminal />
+          <div className="h-stage"><UniMonitorTerminal /></div>
         ) : demoUrl ? (
-          <section className="demo-frame-wrap" aria-label={`${project.title} interactive demonstration`}>
-            <div className="demo-frame-top"><span><i /> Interactive demonstration</span><a href={demoUrl} target="_blank" rel="noreferrer">Open in new tab <ArrowUpRight size={13} /></a></div>
-            <iframe className="demo-frame" title={`${project.title} demonstration`} src={demoUrl} loading="lazy" allow="clipboard-read; clipboard-write" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads" />
+          <div className="h-stage">
+            <div className="h-stage-head"><span><i /> Interactive demo</span><a href={demoUrl} target="_blank" rel="noreferrer">Open full screen <ArrowUpRight size={12} /></a></div>
+            <iframe className="h-frame" title={`${project.title} demo`} src={demoUrl} loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads" />
+          </div>
+        ) : thumbnailUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <div className="h-hero-shot"><img src={thumbnailUrl} alt={`${project.title} screenshot`} /></div>
+        ) : null}
+
+        <section className="h-about">
+          <div>
+            <h2>About the project</h2>
+            <div className="h-prose">
+              {project.longDescription.split(/\n\s*\n/).map((para, i) => <p key={i}>{para}</p>)}
+            </div>
+          </div>
+          <dl className="h-facts">
+            <div><dt>Category</dt><dd>{project.category}</dd></div>
+            <div><dt>Stack</dt><dd className="h-chips">{project.tech.map((t) => <span key={t}>{t}</span>)}</dd></div>
+            {liveDemo && <div><dt>Demo</dt><dd>{project.slug === "motionsense" ? "Runs in your browser (ONNX Runtime Web)" : "Real scripts in a Linux sandbox"}</dd></div>}
+            {liveUrl && <div><dt>Website</dt><dd><a href={liveUrl} target="_blank" rel="noreferrer">{new URL(liveUrl).host} ↗</a></dd></div>}
+            {repository && <div><dt>Repository</dt><dd><a href={repository} target="_blank" rel="noreferrer">{new URL(repository).pathname.slice(1)} ↗</a></dd></div>}
+          </dl>
+        </section>
+
+        {presentationUrl && (
+          <section id="presentation" style={{ paddingBottom: 90 }}>
+            <div className="h-section-head">
+              <div><span className="h-eyebrow">Presentation</span><h2>Walk through the deck</h2></div>
+              <a className="h-btn h-btn-light" href={presentationUrl} target="_blank" rel="noreferrer">Download <ArrowUpRight size={14} /></a>
+            </div>
+            <iframe className="h-frame" title={`${project.title} presentation`} src={presentationSource} allowFullScreen loading="lazy" />
           </section>
-        ) : (
-          <div className="demo-placeholder"><strong>Interactive demonstration</strong><span>The project entry is live. Its hosted demonstration URL can be added from the project dashboard when ready.</span></div>
         )}
-      </article>
-    </main>
+      </main>
+      <HubFooter />
+    </div>
   );
 }

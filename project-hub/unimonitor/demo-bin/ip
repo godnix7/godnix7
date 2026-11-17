@@ -4,9 +4,9 @@
 case "$*" in
   "-brief address"|"-br a"|"address show"|"address"|"a")
     addrs=$(awk '/32 host LOCAL/ {print prev} {prev = $2}' /proc/net/fib_trie 2>/dev/null | sort -u | tr '\n' ' ')
-    for dev in /sys/class/net/*; do
-      name=${dev##*/}
-      state=$(tr '[:lower:]' '[:upper:]' < "$dev/operstate" 2>/dev/null)
+    devs=$(awk -F: 'NR > 2 {gsub(/ /, "", $1); print $1}' /proc/net/dev 2>/dev/null)
+    for name in $devs; do
+      state=$(tr '[:lower:]' '[:upper:]' < "/sys/class/net/$name/operstate" 2>/dev/null)
       [[ "$name" == lo ]] && { printf '%-16s %-14s %s\n' lo UNKNOWN "127.0.0.1/8"; continue; }
       printf '%-16s %-14s %s\n' "$name" "${state:-UNKNOWN}" "$addrs"
     done ;;

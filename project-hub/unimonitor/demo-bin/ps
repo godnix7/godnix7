@@ -27,7 +27,7 @@ rows=$(
     read -r -a f <<< "$rest"
     uid=$(awk '/^Uid:/ {print $2; exit}' "$d/status" 2>/dev/null)
     user=$(awk -F: -v u="$uid" '$3==u {print $1; exit}' /etc/passwd 2>/dev/null); user=${user:-$uid}
-    args=$(tr '\0' ' ' < "$d/cmdline" 2>/dev/null); args=${args:-[$comm]}
+    args=$(tr '\0\n\t' '   ' < "$d/cmdline" 2>/dev/null | cut -c1-120); args=${args:-[$comm]}
     printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$pid" "${f[1]}" "$user" "${f[0]}" \
       "$(( ${f[11]} + ${f[12]} ))" "${f[19]}" "${f[21]}" "${comm// /_}" "$args"
   done | awk -F'\t' -v OFS='\t' -v hz="$hz" -v up="$up" -v mt="$memtotal" '{

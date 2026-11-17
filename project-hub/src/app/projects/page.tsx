@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import ProjectsSection from "@/components/ProjectsSection";
+import { HubFooter, HubNav } from "@/components/hub/HubChrome";
+import ProjectGrid from "@/components/hub/ProjectGrid";
 import { getPublishedProjects } from "@/lib/projects";
 
-export const metadata: Metadata = { title: "Project Index", description: "Explore software, systems, and applied AI projects by Nischay Kademane." };
+export const metadata: Metadata = { title: "Projects", description: "Software, systems and applied AI projects by Nischay Kademane." };
 export const dynamic = "force-dynamic";
 
 export default async function ProjectsPage() {
-  const projects = await getPublishedProjects();
+  const projects = (await getPublishedProjects()).sort((a, b) => a.sortOrder - b.sortOrder);
+  const cards = projects.map(({ slug, title, category, description, tech, thumbnailUrl, liveUrl, repository }) => ({
+    slug, title, category, description, tech, thumbnailUrl, liveUrl, repository,
+  }));
   return (
-    <main className="archive-page">
-      <div className="ambient-grid" aria-hidden="true" />
-      <div className="film-grain" aria-hidden="true" />
-      <Navbar />
-      <div className="section-wrap subpage-main">
-        <Link className="detail-back" href="/#projects"><ArrowLeft size={14} /> Back to portfolio</Link>
-        <p className="section-kicker" style={{ marginTop: 45 }}>Project index <span className="kicker-rule" /><span className="kicker-count">{String(projects.length).padStart(2, "0")} ENTRIES</span></p>
-        <h1 className="subpage-heading">A body of<br /><em>work in progress.</em></h1>
-        <p className="subpage-intro">A growing collection of products, systems, research, and experiments. Open a project for the context, tools, and live demo where available.</p>
-        <div className="project-archive-grid"><ProjectsSection projects={projects} /></div>
-        <Link className="text-link" href="/#contact">Have a problem I should explore? <ArrowUpRight size={14} /></Link>
-      </div>
-    </main>
+    <div className="hub">
+      <HubNav />
+      <main className="h-wrap" style={{ paddingBottom: 80 }}>
+        <section className="h-hero" style={{ paddingBottom: 30 }}>
+          <span className="h-eyebrow">Project index · {String(cards.length).padStart(2, "0")}</span>
+          <h1>Every project, <em>one place.</em></h1>
+          <p>Filter by area, open a project for the full story, or jump straight to a live demo.</p>
+        </section>
+        <ProjectGrid projects={cards} />
+      </main>
+      <HubFooter />
+    </div>
   );
 }

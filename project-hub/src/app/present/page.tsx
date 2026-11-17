@@ -13,7 +13,7 @@ async function decks() {
   if (!blobConfigured()) return [];
   try {
     const { blobs } = await list({ prefix: DECK_PREFIX, limit: 100 });
-    return blobs.sort((a, b) => +new Date(b.uploadedAt) - +new Date(a.uploadedAt));
+    return blobs.filter((b) => !b.pathname.endsWith("/") && b.size > 0).sort((a, b) => +new Date(b.uploadedAt) - +new Date(a.uploadedAt));
   } catch (e) {
     console.error("[present] listing decks failed:", e instanceof Error ? `${e.name}: ${e.message}` : e);
     return [];

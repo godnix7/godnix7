@@ -1,20 +1,44 @@
 import type { Metadata } from "next";
-import { Manrope, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const sans = Manrope({ variable: "--font-sans", subsets: ["latin"] });
-const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Nischay Kademane — Backend & AI Engineer",
-  description:
-    "Software engineer building secure backend systems, real-time platforms and AI products. Selected work, stack and open-source activity.",
+  metadataBase: new URL("https://nischay.tech"),
+  title: {
+    default: "Nischay Kademane — Software Engineer",
+    template: "%s — Nischay Kademane",
+  },
+  description: "Selected software, systems, and applied AI projects by Nischay Kademane.",
+  openGraph: {
+    title: "Nischay Kademane — Software Engineer",
+    description: "Selected software, systems, and applied AI projects.",
+    url: "https://nischay.tech",
+    siteName: "Nischay Kademane",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nischay Kademane — Software Engineer",
+    description: "Selected software, systems, and applied AI projects.",
+  },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable} antialiased`}>
+      <body className="font-sans bg-background text-foreground">
+        <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] noise-bg" />
+        {children}
+      </body>
     </html>
   );
 }

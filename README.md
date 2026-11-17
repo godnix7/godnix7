@@ -1,51 +1,31 @@
-# Hi, I'm Nischay Kademane 👋
+# Nischay Kademane — Portfolio + Project Desk
 
-**Backend & AI engineer from Bengaluru, India.** I build secure APIs, real-time platforms and AI products, and ship them end to end.
+The main portfolio at [nischay.tech](https://nischay.tech) and its project CMS, built with Next.js 16, TypeScript, React Three Fiber, Neon Postgres, and Vercel Blob.
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-godnix7.vercel.app-0f1b2d?style=for-the-badge&logo=vercel&logoColor=white)](https://godnix7.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-nischaykademane-0f1b2d?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nischaykademane/)
-[![X](https://img.shields.io/badge/X-@NISCHAYKADEMANE-0f1b2d?style=for-the-badge&logo=x&logoColor=white)](https://x.com/NISCHAYKADEMANE)
-[![Email](https://img.shields.io/badge/Email-Get%20in%20touch-c2620a?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nischaykademane2006@gmail.com)
+The site is an editorial project index with an interactive 3D hero, public case pages, external live-project links, and project demos. The private admin lives at `admin.nischay.tech` after the domain and environment setup is complete.
 
-## About me
+## Project demos
 
-- 🧱 I like problems where reliability, security and speed all matter at once: health records, real-time judging, streaming, video forensics.
-- 🤖 Currently building AI products: multi-agent workflows, NLP chatbots and deepfake detection.
-- 🏆 Hackathon builder at heart. Most of my projects started as a weekend build and kept growing.
-- 🌱 Always sharpening my backend architecture and applied-AI skills.
-- 📫 Open to roles, internships and freelance work. Say hi!
+- **MotionSense** stays in the existing [Streamlit repository](https://github.com/godnix7/MotionSense---Deep-Learning-Project). The portfolio embeds its Streamlit inference app on the project detail page when `MOTIONSENSE_STREAMLIT_URL` is set.
+- **UniMonitor** stays in the existing [Linux monitoring repository](https://github.com/godnix7/Unimonitor). `demo-service/` runs its real CLI with three fixed operations inside a restricted Docker service. It reports container-scoped measurements, not visitor or Render-host metrics.
 
-## Tech I work with
+## Local development
 
-![Languages](https://skillicons.dev/icons?i=ts,py,js,java,go&theme=light)
+```powershell
+npm install
+Copy-Item .env.example .env.local
+npm run dev
+```
 
-![Backend](https://skillicons.dev/icons?i=fastapi,django,nodejs,express,flask&theme=light)
+The public portfolio has curated server-side fallback data while Neon is not connected. Admin sign-in and project changes need `DATABASE_URL`, the SQL setup, administrator credentials, and the Blob store token.
 
-![Frontend](https://skillicons.dev/icons?i=react,nextjs,threejs,tailwind&theme=light)
+## Data setup
 
-![Data and infra](https://skillicons.dev/icons?i=postgres,redis,elasticsearch,docker,aws,vercel,git&theme=light)
+Run `database/schema.sql` then `database/seed.sql` in Neon SQL Editor. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for the Vercel environment variables, administrator setup, custom domain routing, and demo-service deployment steps.
 
-## Featured projects
+## Checks
 
-| Project | What it is | Stack |
-| :-- | :-- | :-- |
-| 🏥 [**MediLocker**](https://github.com/godnix7/MediLocker) · [live](https://medilocker-main.vercel.app/) | Zero-trust medical vault and centralized hospital system with QR-based record sharing | FastAPI, PostgreSQL, S3, Redis |
-| 🧠 [**Lynxis**](https://github.com/godnix7/Lynxis) · [live](https://lynxis.vercel.app) | Multi-agent AI code intelligence with 3D repo visualization | Node.js, Prisma, Three.js, Anthropic |
-| 🎯 [**EventByte**](https://github.com/godnix7/EventByte) · [live](https://event-byte.vercel.app) | Real-time hackathon judging and event management | Django, TypeScript, Socket.io |
-| 🎬 [**Deepfake Detection**](https://github.com/godnix7/Deepfake-detection) | Detects and classifies AI-generated deepfake videos | Python |
-| 🎵 [**LocalMusic**](https://github.com/godnix7/LocalMusic) · [live](https://localmusic-three.vercel.app) | Music streaming platform with admin-controlled subscriptions and fast search | Fastify, Elasticsearch, Redis |
-| 💬 [**Althea**](https://github.com/godnix7/Althea) · [live](https://althea-gamma.vercel.app) | Mental-health chatbot for day-to-day life | Python, NLP |
-| 🌾 [**Harvest Club**](https://github.com/godnix7/harvest-club) · [live](https://harvestclub.vercel.app) | Website for a student agritech community | TypeScript, Next.js |
-
-More on my [portfolio](https://godnix7.vercel.app/) or [all repositories](https://github.com/godnix7?tab=repositories).
-
-## GitHub
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=godnix7&show_icons=true&hide_border=true" alt="GitHub stats" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=godnix7&layout=compact&hide_border=true" alt="Top languages" height="150" />
-</p>
-
-## Let's connect
-
-[Portfolio](https://godnix7.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/nischaykademane/) · [X](https://x.com/NISCHAYKADEMANE) · [nischaykademane2006@gmail.com](mailto:nischaykademane2006@gmail.com)
+```powershell
+npm run lint
+npm run build
+```

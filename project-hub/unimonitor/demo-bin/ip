@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Minimal /proc-based `ip` for the website demo sandbox (no iproute2 installed).
+# Supports:  ip -brief address   and   ip route show default
+case "$*" in
+  "-brief address"|"-br a"|"address show"|"address"|"a")
+    addrs=$(awk '/32 host LOCAL/ {print prev} {prev = $2}' /proc/net/fib_trie 2>/dev/null | sort -u | tr '\n' ' ')
+    for dev in /sys/class/net/*; do
+      name=${dev##*/}
+      state=$(tr '[:lower:]' '[:upper:]' < "$dev/operstate" 2>/dev/null)
+      [[ "$name" == lo ]] && { printf '%-16s %-14s %s\n' lo UNKNOWN "127.0.0.1/8"; continue; }
+      printf '%-16s %-14s %s\n' "$name" "${state:-UNKNOWN}" "$addrs"
+    done ;;
+  "route show default")
+    awk 'NR > 1 && $2 == "00000000" {
+           g = $3; printf "default via %d.%d.%d.%d dev %s\n",
+             strtonum("0x" substr(g,7,2)), strtonum("0x" substr(g,5,2)), strtonum("0x" substr(g,3,2)), strtonum("0x" substr(g,1,2)), $1 }' \
+      /proc/net/route 2>/dev/null ;;
+  *) echo "ip (demo): unsupported arguments" >&2; exit 1 ;;
+esac

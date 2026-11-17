@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Minimal `hostname` for the website demo sandbox (no net-tools / hostname package installed).
+if [[ "${1:-}" == "-I" ]]; then
+  # IPv4 addresses of local interfaces, read from the kernel routing table
+  awk '/32 host LOCAL/ {print prev} {prev = $2}' /proc/net/fib_trie 2>/dev/null | grep -v '^127\.' | sort -u | tr '\n' ' '
+  echo
+else
+  cat /proc/sys/kernel/hostname 2>/dev/null || echo localhost
+fi

@@ -22,7 +22,7 @@ const ALIASES: Record<string, string> = {
 const WELCOME: Line[] = [
   { kind: "info", text: "UniMonitor live demo: the real Bash toolkit running in a Linux cloud sandbox." },
   { kind: "info", text: "Click a command or type one (try: dashboard, cpu, memory, disk, processes, health, report)." },
-  { kind: "info", text: "Readings describe the sandbox server, never your own computer." },
+  { kind: "info", text: "Readings describe the sandbox server, never your own computer. Where the sandbox lacks ps/ip/ss/hostname, small /proc readers stand in." },
 ];
 
 export default function UniMonitorTerminal() {

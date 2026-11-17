@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Minimal /proc-based `ss -tuln` for the website demo sandbox (no iproute2 installed).
+printf '%-6s %-8s %-28s %s\n' Netid State "Local Address:Port" "Peer Address:Port"
+for proto in tcp udp tcp6 udp6; do
+  [[ -r /proc/net/$proto ]] || continue
+  awk -v p="${proto%6}" 'NR > 1 {
+      split($2, a, ":"); st = $4
+      if (p == "tcp" && st != "0A") next          # 0A = LISTEN
+      if (p == "udp" && st != "07") next          # 07 = unconnected/listening
+      port = strtonum("0x" a[2]); h = a[1]
+      ip = (length(h) == 8) ? sprintf("%d.%d.%d.%d", strtonum("0x" substr(h,7,2)), strtonum("0x" substr(h,5,2)), strtonum("0x" substr(h,3,2)), strtonum("0x" substr(h,1,2))) : "[::]"
+      printf "%-6s %-8s %-28s %s\n", p, (p == "tcp" ? "LISTEN" : "UNCONN"), ip ":" port, "*:*" }' "/proc/net/$proto"
+done

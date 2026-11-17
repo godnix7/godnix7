@@ -26,6 +26,14 @@ source "$SCRIPT_DIR/modules/report_manager.sh"
 load_config
 init_directories 2>/dev/null || :
 
+# The cloud sandbox lacks procps/iproute2/hostname. Where a tool is missing, use the small
+# /proc-based stand-ins in demo-bin/ (shell functions, so no executable bit is needed).
+for tool in ps hostname ip ss; do
+  if ! command -v "$tool" >/dev/null 2>&1; then
+    eval "$tool() { bash \"\$SCRIPT_DIR/demo-bin/$tool\" \"\$@\"; }"
+  fi
+done
+
 case "${1:-}" in
   overview)  app_header; system_health_print ;;
   sysinfo)   system_info_print ;;

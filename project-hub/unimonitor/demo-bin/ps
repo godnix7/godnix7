@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Minimal /proc-based `ps` for the website demo sandbox, which has no procps package.
+# Supports what UniMonitor's read-only views use:  ps -eo <cols> [--sort=-pcpu|-pmem]
+# Columns: pid ppid user stat pcpu pmem comm args   (a trailing "=" suppresses the header)
+set -o nounset
+
+cols="pid,ppid,user,stat,pcpu,pmem,comm" sort=""
+while (( $# )); do
+  case "$1" in
+    -eo|-o) cols=${2:-$cols}; shift 2 ;;
+    -e|aux) shift ;;
+    --sort=*) sort=${1#--sort=}; shift ;;
+    *) shift ;;
+  esac
+done
+
+hz=$(getconf CLK_TCK 2>/dev/null || echo 100)
+read -r up _ < /proc/uptime
+memtotal=$(awk '/^MemTotal:/ {print $2}' /proc/meminfo)
+
+rows=$(
+  for d in /proc/[0-9]*; do
+    pid=${d#/proc/}
+    stat=$(cat "$d/stat" 2>/dev/null) || continue
+    comm=${stat#*(}; comm=${comm%)*}
+    rest=${stat##*) }
+    read -r -a f <<< "$rest"
+    uid=$(awk '/^Uid:/ {print $2; exit}' "$d/status" 2>/dev/null)
+    user=$(awk -F: -v u="$uid" '$3==u {print $1; exit}' /etc/passwd 2>/dev/null); user=${user:-$uid}
+    args=$(tr '\0' ' ' < "$d/cmdline" 2>/dev/null); args=${args:-[$comm]}
+    printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$pid" "${f[1]}" "$user" "${f[0]}" \
+      "$(( ${f[11]} + ${f[12]} ))" "${f[19]}" "${f[21]}" "${comm// /_}" "$args"
+  done | awk -F'\t' -v OFS='\t' -v hz="$hz" -v up="$up" -v mt="$memtotal" '{
+      el = up - $6 / hz; cpu = (el > 0) ? 100 * ($5 / hz) / el : 0
+      mem = (mt > 0) ? 100 * ($7 * 4) / mt : 0
+      printf "%s\t%s\t%s\t%s\t%.1f\t%.1f\t%s\t%s\n", $1, $2, $3, $4, cpu, mem, $8, $9 }'
+)
+
+case "$sort" in
+  -pcpu) rows=$(sort -t$'\t' -k5,5nr <<< "$rows") ;;
+  -pmem) rows=$(sort -t$'\t' -k6,6nr <<< "$rows") ;;
+esac
+
+awk -F'\t' -v cols="$cols" 'BEGIN {
+    n = split(cols, c, ",")
+    idx["pid"]=1; idx["ppid"]=2; idx["user"]=3; idx["stat"]=4; idx["pcpu"]=5; idx["pmem"]=6; idx["comm"]=7; idx["args"]=8
+    head["pid"]="PID"; head["ppid"]="PPID"; head["user"]="USER"; head["stat"]="STAT"; head["pcpu"]="%CPU"; head["pmem"]="%MEM"; head["comm"]="COMMAND"; head["args"]="COMMAND"
+    w["pid"]=7; w["ppid"]=7; w["user"]=-12; w["stat"]=-4; w["pcpu"]=5; w["pmem"]=5; w["comm"]=-16; w["args"]=-40
+    show = 0; line = ""
+    for (i = 1; i <= n; i++) { name = c[i]; if (name !~ /=$/) show = 1; sub(/=$/, "", name); c[i] = name
+      line = line sprintf("%" w[name] "s ", head[name]) }
+    if (show) print line
+  }
+  NF { line = ""; for (i = 1; i <= n; i++) line = line sprintf("%" w[c[i]] "s ", $(idx[c[i]])); print line }' <<< "$rows"

@@ -1,0 +1,18 @@
+{
+  "classes": [
+    "JumpingJack",
+    "PushUps",
+    "BodyWeightSquats",
+    "Lunges",
+    "TaiChi",
+    "BoxingSpeedBag"
+  ],
+  "display_names": {
+    "JumpingJack": "Jumping Jack",
+    "PushUps": "Push-Ups",
+    "BodyWeightSquats": "Bodyweight Squats",
+    "Lunges": "Lunges",
+    "TaiChi": "Tai Chi",
+    "BoxingSpeedBag": "Boxing (Speed Bag)"
+  }
+}

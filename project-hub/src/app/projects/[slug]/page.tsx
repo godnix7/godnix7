@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, BookOpen, Code2, ExternalLink, Presentation } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { getProjectBySlug } from "@/lib/projects";
+import MotionSenseDemo from "@/components/demos/MotionSenseDemo";
+import UniMonitorTerminal from "@/components/demos/UniMonitorTerminal";
 
 export const dynamic = "force-dynamic";
 
@@ -92,7 +94,11 @@ export default async function ProjectPage({ params }: Props) {
           </section>
         )}
 
-        {demoUrl ? (
+        {project.slug === "motionsense" ? (
+          <MotionSenseDemo />
+        ) : project.slug === "unimonitor" ? (
+          <UniMonitorTerminal />
+        ) : demoUrl ? (
           <section className="demo-frame-wrap" aria-label={`${project.title} interactive demonstration`}>
             <div className="demo-frame-top"><span><i /> Interactive demonstration</span><a href={demoUrl} target="_blank" rel="noreferrer">Open in new tab <ArrowUpRight size={13} /></a></div>
             <iframe className="demo-frame" title={`${project.title} demonstration`} src={demoUrl} loading="lazy" allow="clipboard-read; clipboard-write" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads" />

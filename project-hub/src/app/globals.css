@@ -471,3 +471,64 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- MotionSense in-browser demo ---------- */
+.ms-wrap, .um-wrap { margin-top: 55px; padding: 12px; border: 1px solid rgba(217, 250, 99, .27); background: #171a14; }
+.ms-start { display: grid; gap: 22px; padding: 38px 30px; justify-items: start; }
+.ms-start h2 { margin: 0; font-size: clamp(26px, 3vw, 38px); letter-spacing: -.035em; }
+.ms-start p { margin: 10px 0 0; max-width: 640px; color: var(--paper-dim); line-height: 1.6; }
+.ms-start .button:disabled { opacity: .75; cursor: progress; }
+.ms-progress { width: min(420px, 100%); height: 3px; background: rgba(241, 242, 229, .12); }
+.ms-progress span { display: block; height: 100%; background: var(--acid); transition: width .2s ease; }
+.ms-error { color: var(--coral); font-size: 13px; margin: 8px 0 0; }
+.ms-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 14px; }
+.ms-stage { position: relative; }
+.ms-video { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #0c0d0b; }
+.ms-overlay { position: absolute; left: 14px; top: 14px; display: grid; gap: 4px; padding: 12px 16px; background: rgba(12, 13, 11, .78); border-left: 3px solid var(--muted); backdrop-filter: blur(6px); }
+.ms-overlay strong { font-size: clamp(20px, 2.4vw, 30px); letter-spacing: -.03em; }
+.ms-overlay span { font: 11px var(--font-mono, monospace); color: var(--paper-dim); letter-spacing: .04em; }
+.ms-confident { border-left-color: var(--acid); }
+.ms-confident strong { color: var(--acid); }
+.ms-uncertain { border-left-color: var(--coral); }
+.ms-sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ms-sources button, .ms-sources label { cursor: pointer; padding: 8px 11px; border: 1px solid rgba(241, 242, 229, .16); background: rgba(241, 242, 229, .03); color: var(--paper-dim); font-size: 12px; }
+.ms-sources .is-active, .ms-sources button:hover, .ms-sources label:hover { border-color: var(--acid); color: var(--acid); }
+.ms-panel { display: grid; align-content: start; gap: 14px; padding: 16px; border: 1px solid rgba(241, 242, 229, .1); background: #12140f; }
+.ms-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ms-bars li { position: relative; display: flex; justify-content: space-between; padding: 8px 10px; font-size: 13px; color: var(--paper-dim); background: rgba(241, 242, 229, .03); overflow: hidden; }
+.ms-bars li span, .ms-bars li b { position: relative; z-index: 1; }
+.ms-bars li b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.ms-bars li i { position: absolute; inset: 0 auto 0 0; background: rgba(241, 242, 229, .09); transition: width .35s ease; }
+.ms-bars li.is-top { color: var(--night); }
+.ms-bars li.is-top i { background: var(--acid); }
+.ms-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; }
+.ms-stats div { padding: 9px 10px; background: rgba(241, 242, 229, .03); }
+.ms-stats dt { font: 9px var(--font-mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.ms-stats dd { margin: 4px 0 0; font-size: 16px; font-variant-numeric: tabular-nums; }
+.ms-timeline { display: flex; flex-wrap: wrap; gap: 3px; min-height: 14px; }
+.ms-timeline i { width: 10px; height: 14px; background: #33362c; }
+.ms-timeline .c0 { background: #d9fa63; } .ms-timeline .c1 { background: #ff8268; } .ms-timeline .c2 { background: #7fd6c2; }
+.ms-timeline .c3 { background: #f4c95d; } .ms-timeline .c4 { background: #a99cf0; } .ms-timeline .c5 { background: #6fb4ff; }
+.ms-note { margin: 0; font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+/* ---------- UniMonitor terminal ---------- */
+.um-mode { display: flex; gap: 4px; }
+.um-mode button { padding: 4px 9px; border: 1px solid rgba(241, 242, 229, .16); background: none; color: var(--paper-dim); font: inherit; cursor: pointer; }
+.um-mode .is-active { border-color: var(--acid); color: var(--acid); }
+.um-commands { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 0 10px; }
+.um-commands button { padding: 7px 10px; border: 1px solid rgba(217, 250, 99, .25); background: rgba(217, 250, 99, .04); color: var(--acid); font: 12px var(--font-mono, ui-monospace, monospace); cursor: pointer; }
+.um-commands button:hover:not(:disabled) { background: rgba(217, 250, 99, .12); }
+.um-commands button:disabled { opacity: .5; cursor: progress; }
+.um-screen { height: min(70vh, 640px); overflow: auto; padding: 16px 18px; background: #0b0c0a; font: 12.5px/1.55 ui-monospace, "JetBrains Mono", Consolas, monospace; color: #d7dbc8; cursor: text; }
+.um-screen pre { margin: 0 0 10px; white-space: pre-wrap; word-break: break-word; font: inherit; }
+.um-cmd { margin: 4px 0 6px; color: var(--paper); }
+.um-cmd span, .um-prompt span { color: var(--acid); }
+.um-info { color: var(--muted); }
+.um-err { color: var(--coral); }
+.um-prompt { display: flex; gap: 8px; align-items: center; }
+.um-prompt input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: var(--paper); font: inherit; caret-color: var(--acid); }
+
+@media (max-width: 860px) {
+  .ms-grid { grid-template-columns: 1fr; }
+  .ms-wrap, .um-wrap { margin-inline: -20px; padding: 8px; }
+}

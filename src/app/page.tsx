@@ -1,9 +1,7 @@
-import ClientExperience from "@/components/ClientExperience";
-import { getPublishedProjects } from "@/lib/projects";
-
-export const dynamic = "force-dynamic";
+import Experience from "@/components/Experience";
+import { getGitHub } from "@/lib/github";
 
 export default async function Home() {
-  const projects = await getPublishedProjects();
-  return <ClientExperience projects={projects} />;
+  const gh = await getGitHub();
+  return <Experience gh={gh} />;
 }

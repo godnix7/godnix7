@@ -59,8 +59,8 @@ export default async function PresentPage() {
                 <strong>{deckTitle(b.pathname)}</strong>
                 <small>{(b.size / 1048576).toFixed(1)} MB · {new Date(b.uploadedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</small>
                 <div style={{ display: "flex", gap: 8 }}>
-                  <Link className="h-btn h-btn-dark h-btn-sm" href={`/present/view?u=${encodeURIComponent(b.url)}&t=${encodeURIComponent(deckTitle(b.pathname))}`}><Play size={14} /> Present</Link>
-                  <a className="h-btn h-btn-light h-btn-sm" href={b.downloadUrl}><Download size={14} /> Download</a>
+                  <Link className="h-btn h-btn-dark h-btn-sm" href={`/present/view?u=${encodeURIComponent(`/${b.pathname}`)}&t=${encodeURIComponent(deckTitle(b.pathname))}`}><Play size={14} /> Present</Link>
+                  <a className="h-btn h-btn-light h-btn-sm" href={`/${b.pathname}?download=1`}><Download size={14} /> Download</a>
                 </div>
               </div>
             ))}

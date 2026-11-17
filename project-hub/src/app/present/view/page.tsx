@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { headers } from "next/headers";
 import { viewerUrl } from "@/lib/decks";
 
 export const dynamic = "force-dynamic";
@@ -8,7 +9,10 @@ type Props = { searchParams: Promise<{ u?: string; t?: string }> };
 
 export default async function PresentView({ searchParams }: Props) {
   const { u = "", t = "" } = await searchParams;
-  const src = viewerUrl(u);
+  // decks from our own store are passed as a path (/decks/...); make it an absolute https URL
+  const host = (await headers()).get("x-forwarded-host") ?? (await headers()).get("host") ?? "";
+  const abs = u.startsWith("/decks/") ? `https://${host}${u}` : u;
+  const src = viewerUrl(abs);
   return (
     <div className="hub">
       <div className="h-present-shell">

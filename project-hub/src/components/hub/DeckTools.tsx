@@ -18,7 +18,7 @@ export function DeckUploader({ enabled }: { enabled: boolean }) {
     try {
       const safe = file.name.replace(/[^A-Za-z0-9._ -]/g, "_");
       await upload(`decks/${safe}`, file, {
-        access: "public",
+        access: "private",
         handleUploadUrl: "/api/present/upload",
         clientPayload: JSON.stringify({ key }),
         multipart: file.size > 8 * 1024 * 1024,

@@ -49,6 +49,18 @@ case "${1:-}" in
     [[ -f "$file" ]] && cat -- "$file" && rm -f -- "$file"
     ;;
   version)   printf 'UniMonitor 1.0\n' ;;
+  # plain read-only Linux commands (fixed arguments only)
+  whoami)    whoami 2>/dev/null || id -un ;;
+  uname)     uname -a ;;
+  uptime)    uptime 2>/dev/null || awk '{printf "up %d min\n", $1/60}' /proc/uptime ;;
+  date)      date ;;
+  df)        df -h ;;
+  free)      free -h 2>/dev/null || grep -E '^(MemTotal|MemFree|MemAvailable|SwapTotal|SwapFree):' /proc/meminfo ;;
+  osrelease) cat /etc/os-release ;;
+  ls)        ls -la "$SCRIPT_DIR" ;;
+  pwd)       printf '%s\n' "$SCRIPT_DIR" ;;
+  cpuinfo)   grep -m1 'model name' /proc/cpuinfo; printf 'processors: %s\n' "$(grep -c ^processor /proc/cpuinfo)" ;;
+  loadavg)   cat /proc/loadavg ;;
   help)      bash "$SCRIPT_DIR/main.sh" --help ;;
   *)         printf 'Unknown operation\n' >&2; exit 2 ;;
 esac

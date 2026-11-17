@@ -12,6 +12,7 @@ export function HubNav() {
           <Link href="/#live" className="hide-sm">Live demos</Link>
           <Link href="/projects">Projects</Link>
           <Link href="/present">Present</Link>
+          <Link href="/admin/login">Login</Link>
           <a href="https://nischay.tech" className="h-btn h-btn-dark h-btn-sm">
             nischay.tech <ArrowUpRight size={14} />
           </a>

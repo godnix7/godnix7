@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, BookOpen, Code2, ExternalLink, Presentation } from "lucide-react";
 import { HubFooter, HubNav } from "@/components/hub/HubChrome";
-import MotionSenseDemo from "@/components/demos/MotionSenseDemo";
 import UniMonitorTerminal from "@/components/demos/UniMonitorTerminal";
 import { getProjectBySlug } from "@/lib/projects";
 
@@ -65,9 +64,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </header>
 
-        {project.slug === "motionsense" ? (
-          <div className="h-stage"><MotionSenseDemo /></div>
-        ) : project.slug === "unimonitor" ? (
+        {project.slug === "unimonitor" ? (
           <div className="h-stage"><UniMonitorTerminal /></div>
         ) : demoUrl ? (
           <div className="h-stage">

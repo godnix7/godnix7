@@ -26,7 +26,7 @@ export default async function AdminLoginPage() {
           <h2>Welcome back.</h2>
           <p>Sign in with the administrator credentials configured for this project.</p>
           <LoginForm configured={configured} />
-          {!configured && <div className="admin-config-note">Set DATABASE_URL, ADMIN_USERNAME, ADMIN_PASSWORD_HASH, and SESSION_SECRET in the deployment environment, then apply the database schema.</div>}
+          {!configured && <div className="admin-config-note">Set ADMIN_USERNAME and ADMIN_PASSWORD in the Vercel project’s environment variables, then redeploy. A database is optional.</div>}
         </div>
       </section>
     </main>

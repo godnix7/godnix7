@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ArrowUpRight, FileText, LayoutDashboard, LogOut, Plus, Settings2 } from "lucide-react";
+import { ArrowUpRight, FileText, LayoutDashboard, LogOut, Plus, Presentation, Settings2 } from "lucide-react";
 import type { ReactNode } from "react";
 
 const navItems = [
   { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
   { label: "Projects", href: "/dashboard/projects", icon: FileText },
+  { label: "Presentations", href: "/present", icon: Presentation },
 ];
 
 export default function AdminShell({ children }: { children: ReactNode }) {

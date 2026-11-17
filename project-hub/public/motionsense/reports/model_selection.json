@@ -1,0 +1,22 @@
+{
+  "baseline": {
+    "unfreeze_blocks": 4,
+    "use_deltas": false,
+    "best_val_f1_macro": 0.7768253968253968
+  },
+  "d0": {
+    "unfreeze_blocks": 0,
+    "use_deltas": true,
+    "best_val_f1_macro": 0.7992586819674106
+  },
+  "d2": {
+    "unfreeze_blocks": 2,
+    "use_deltas": true,
+    "best_val_f1_macro": 0.7966958807476049
+  },
+  "d4": {
+    "unfreeze_blocks": 4,
+    "use_deltas": true,
+    "best_val_f1_macro": 0.7599462365591397
+  }
+}

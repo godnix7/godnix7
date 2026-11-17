@@ -4,7 +4,10 @@ import { upload } from "@vercel/blob/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function DeckUploader({ enabled }: { enabled: boolean }) {
+const DECK_ACCEPT = ".pptx,.ppt,.ppsx,.pps,.potx,.pptm,.odp,.pdf";
+const DECK_RE = /\.(pptx|ppt|ppsx|pps|potx|pptm|odp|pdf)$/i;
+
+export function DeckUploader({ enabled, admin }: { enabled: boolean; admin: boolean }) {
   const router = useRouter();
   const [key, setKey] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -13,7 +16,7 @@ export function DeckUploader({ enabled }: { enabled: boolean }) {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!file) return;
-    if (!/\.(pptx?|pdf)$/i.test(file.name)) return setState({ busy: false, pct: 0, msg: "Choose a .pptx, .ppt or .pdf file.", ok: false });
+    if (!DECK_RE.test(file.name)) return setState({ busy: false, pct: 0, msg: "Choose a PowerPoint (.pptx, .ppt, .ppsx, .pps, .potx, .pptm), .odp or .pdf file.", ok: false });
     setState({ busy: true, pct: 0, msg: "", ok: false });
     try {
       const safe = file.name.replace(/[^A-Za-z0-9._ -]/g, "_");
@@ -35,16 +38,16 @@ export function DeckUploader({ enabled }: { enabled: boolean }) {
   if (!enabled) {
     return (
       <p className="h-note">
-        On-site upload switches on once a Blob store and a <code>PRESENTER_KEY</code> are set for this Vercel project.
-        Until then, decks added to the project&apos;s Blob store under <code>decks/</code> appear below automatically, and
-        any public deck link can be presented with the box on the right.
+        <a href="/admin/login" style={{ textDecoration: "underline", fontWeight: 600 }}>Sign in</a> to upload presentations
+        (PowerPoint .pptx, .ppt, .ppsx, .pps, .potx, .pptm, OpenDocument .odp, or PDF). Anyone can view and present the decks below.
       </p>
     );
   }
   return (
     <form onSubmit={submit} style={{ display: "grid", gap: 12 }}>
-      <input className="h-input" type="file" accept=".pptx,.ppt,.pdf" onChange={(e) => setFile(e.target.files?.[0] ?? null)} required />
-      <input className="h-input" type="password" placeholder="Presenter key" value={key} onChange={(e) => setKey(e.target.value)} required autoComplete="current-password" />
+      <input className="h-input" type="file" accept={DECK_ACCEPT} onChange={(e) => setFile(e.target.files?.[0] ?? null)} required />
+      <span className="h-note">PowerPoint .pptx, .ppt, .ppsx, .pps, .potx, .pptm · OpenDocument .odp · PDF · up to 100 MB</span>
+      {!admin && <input className="h-input" type="password" placeholder="Presenter key" value={key} onChange={(e) => setKey(e.target.value)} required autoComplete="current-password" />}
       <button className="h-btn h-btn-dark" disabled={state.busy}>{state.busy ? `Uploading… ${state.pct}%` : "Upload presentation"}</button>
       {state.msg && <p className={state.ok ? "h-ok" : "h-error"}>{state.msg}</p>}
     </form>

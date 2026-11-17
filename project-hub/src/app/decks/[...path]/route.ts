@@ -8,6 +8,11 @@ import { DECK_PREFIX } from "@/lib/decks";
 const TYPES: Record<string, string> = {
   pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
   ppt: "application/vnd.ms-powerpoint",
+  ppsx: "application/vnd.openxmlformats-officedocument.presentationml.slideshow",
+  pps: "application/vnd.ms-powerpoint",
+  potx: "application/vnd.openxmlformats-officedocument.presentationml.template",
+  pptm: "application/vnd.ms-powerpoint.presentation.macroEnabled.12",
+  odp: "application/vnd.oasis.opendocument.presentation",
   pdf: "application/pdf",
 };
 

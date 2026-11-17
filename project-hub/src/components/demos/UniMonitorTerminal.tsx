@@ -17,6 +17,10 @@ const ALIASES: Record<string, string> = {
   health: "health", report: "report", "--report": "report", "./main.sh --report": "report",
   version: "version", "--version": "version", "./main.sh --version": "version",
   help: "help", "--help": "help", "./main.sh --help": "help",
+  whoami: "whoami", "id -un": "whoami", uname: "uname", "uname -a": "uname", uptime: "uptime", date: "date",
+  df: "df", "df -h": "df", free: "free", "free -h": "free", "cat /etc/os-release": "osrelease", "lsb_release -a": "osrelease",
+  "cat /proc/cpuinfo": "cpuinfo", lscpu: "cpuinfo", nproc: "cpuinfo", "cat /proc/loadavg": "loadavg",
+  ls: "ls", "ls -la": "ls", "ls -l": "ls", ll: "ls", pwd: "pwd",
 };
 
 const WELCOME: Line[] = [
@@ -72,7 +76,7 @@ export default function UniMonitorTerminal() {
     if (raw === "clear") return setLines([]);
     const op = ALIASES[raw.toLowerCase()];
     if (!op) {
-      print({ kind: "cmd", text: raw }, { kind: "err", text: `${raw.split(" ")[0]}: command not available in this demo. Allowed: ${Object.keys(ALIASES).filter((k) => !k.includes("/") && !k.startsWith("-")).join(", ")}, clear` });
+      print({ kind: "cmd", text: raw }, { kind: "err", text: `${raw.split(" ")[0]}: not available in this demo (read-only allow-list).\nUniMonitor: dashboard, sysinfo, cpu, memory, disk, processes, network, health, report, --version, --help\nLinux: whoami, uname -a, uptime, date, df -h, free -h, cat /etc/os-release, cat /proc/cpuinfo, cat /proc/loadavg, ls -la, pwd, clear` });
       return;
     }
     void run(op, raw);
@@ -88,7 +92,7 @@ export default function UniMonitorTerminal() {
         </span>
       </div>
       <div className="um-commands">
-        {UNIMONITOR_OPS.map((o) => (
+        {UNIMONITOR_OPS.filter((o) => !("shell" in o)).map((o) => (
           <button key={o.id} disabled={busy} title={o.description} onClick={() => run(o.id, o.id === "version" || o.id === "help" ? `./main.sh ${o.label}` : o.label)}>
             {o.label}
           </button>

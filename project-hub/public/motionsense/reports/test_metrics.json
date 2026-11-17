@@ -1,0 +1,129 @@
+{
+  "accuracy": 0.7286432160804021,
+  "precision_macro": 0.7536352082920711,
+  "recall_macro": 0.7405941655941656,
+  "f1_macro": 0.7382012773656945,
+  "confusion_matrix": [
+    [
+      22,
+      0,
+      9,
+      0,
+      0,
+      6
+    ],
+    [
+      0,
+      26,
+      0,
+      4,
+      0,
+      0
+    ],
+    [
+      5,
+      0,
+      20,
+      5,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      10,
+      20,
+      7,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      27,
+      0
+    ],
+    [
+      0,
+      0,
+      5,
+      2,
+      0,
+      30
+    ]
+  ],
+  "classification_report": {
+    "JumpingJack": {
+      "precision": 0.8148148148148148,
+      "recall": 0.5945945945945946,
+      "f1-score": 0.6875,
+      "support": 37.0
+    },
+    "PushUps": {
+      "precision": 1.0,
+      "recall": 0.8666666666666667,
+      "f1-score": 0.9285714285714286,
+      "support": 30.0
+    },
+    "BodyWeightSquats": {
+      "precision": 0.45454545454545453,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.5405405405405406,
+      "support": 30.0
+    },
+    "Lunges": {
+      "precision": 0.625,
+      "recall": 0.5405405405405406,
+      "f1-score": 0.5797101449275363,
+      "support": 37.0
+    },
+    "TaiChi": {
+      "precision": 0.7941176470588235,
+      "recall": 0.9642857142857143,
+      "f1-score": 0.8709677419354839,
+      "support": 28.0
+    },
+    "BoxingSpeedBag": {
+      "precision": 0.8333333333333334,
+      "recall": 0.8108108108108109,
+      "f1-score": 0.821917808219178,
+      "support": 37.0
+    },
+    "accuracy": 0.7286432160804021,
+    "macro avg": {
+      "precision": 0.7536352082920711,
+      "recall": 0.7405941655941656,
+      "f1-score": 0.7382012773656945,
+      "support": 199.0
+    },
+    "weighted avg": {
+      "precision": 0.7536589911331265,
+      "recall": 0.7286432160804021,
+      "f1-score": 0.7324532166531712,
+      "support": 199.0
+    }
+  },
+  "n_samples": 199,
+  "split": "UCF101 official testlist01",
+  "test_loss_clip": 0.8447368832888515,
+  "clip_accuracy": 0.7219430485762144,
+  "clips_per_video": 3,
+  "eval_time_s": 27.75342297554016,
+  "device": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "latency": {
+    "full_window_ms": 13.986509999958798,
+    "full_window_fps": 71.49746434263771,
+    "incremental_step_ms": 13.08426600007806,
+    "incremental_steps_per_s": 76.42767274786634
+  },
+  "classes": [
+    "JumpingJack",
+    "PushUps",
+    "BodyWeightSquats",
+    "Lunges",
+    "TaiChi",
+    "BoxingSpeedBag"
+  ],
+  "checkpoint_epoch": 16
+}

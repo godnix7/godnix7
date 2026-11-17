@@ -27,7 +27,7 @@ export default async function AdminDashboardPage() {
         <Link href="/dashboard/projects?new=1" className="button button-primary"><Plus size={15} /> Add project</Link>
       </div>
 
-      {!databaseReady && <div className="admin-setup-banner"><strong>Connect the project database</strong><span>Apply <code>database/schema.sql</code> and <code>database/seed.sql</code> in Neon’s SQL Editor. The admin area will then load and save projects there.</span></div>}
+      {!databaseReady && <div className="admin-setup-banner"><strong>No database connected (optional)</strong><span>You are signed in, and presentations can be uploaded from <a href="/present" style={{ textDecoration: "underline" }}>Presentations</a>. To add and edit projects from here, connect a Neon database (DATABASE_URL) and apply <code>database/schema.sql</code> and <code>database/seed.sql</code>.</span></div>}
 
       <div className="admin-stat-grid">
         <div className="admin-stat"><span>Total projects</span><strong>{counts.total.toString().padStart(2, "0")}</strong></div>

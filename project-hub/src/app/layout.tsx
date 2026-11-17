@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import "./hub.css";
+import "./motionsense.css";
 
 const inter = Inter({
   variable: "--font-inter",

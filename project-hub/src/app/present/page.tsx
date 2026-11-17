@@ -4,6 +4,7 @@ import { list } from "@vercel/blob";
 import { Download, Play } from "lucide-react";
 import { HubFooter, HubNav } from "@/components/hub/HubChrome";
 import { DeckUploader, PresentLink } from "@/components/hub/DeckTools";
+import { getAdminSession } from "@/lib/auth";
 import { DECK_PREFIX, blobConfigured, deckTitle, uploadsEnabled } from "@/lib/decks";
 
 export const metadata: Metadata = { title: "Present", description: "Upload and present PowerPoint decks." };
@@ -22,6 +23,7 @@ async function decks() {
 
 export default async function PresentPage() {
   const items = await decks();
+  const admin = Boolean(await getAdminSession());
   return (
     <div className="hub">
       <HubNav />
@@ -38,7 +40,7 @@ export default async function PresentPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 18, marginBottom: 46 }}>
           <div className="h-panel">
             <h2 style={{ margin: "0 0 14px", fontSize: 20 }}>Upload a presentation</h2>
-            <DeckUploader enabled={uploadsEnabled()} />
+            <DeckUploader enabled={blobConfigured() && (admin || uploadsEnabled())} admin={admin} />
           </div>
           <div className="h-panel">
             <h2 style={{ margin: "0 0 14px", fontSize: 20 }}>Present from a link</h2>

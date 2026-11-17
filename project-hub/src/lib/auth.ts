@@ -1,27 +1,44 @@
 import "server-only";
-import { createHash } from "node:crypto";
+import { createHash, timingSafeEqual } from "node:crypto";
 import { compare } from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { neon } from "@neondatabase/serverless";
 
+/**
+ * Single-administrator login configured only through environment variables:
+ *   ADMIN_USERNAME  + ADMIN_PASSWORD        (simplest), or
+ *   ADMIN_USERNAME  + ADMIN_PASSWORD_HASH   (bcrypt)
+ *   SESSION_SECRET  optional; if absent, a signing key is derived from the credentials
+ *                   (changing the password then signs everyone out).
+ * A database is optional: with DATABASE_URL, login throttling is shared across instances;
+ * without it, throttling is kept in memory per server instance.
+ */
 const cookieName = "portfolio_admin_session";
 const sessionDurationSeconds = 60 * 60 * 24 * 7;
 
+const sha256 = (s: string) => createHash("sha256").update(s).digest();
+
 function getSessionKey() {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret || secret.length < 32) throw new Error("SESSION_SECRET must contain at least 32 characters.");
-  return new TextEncoder().encode(secret);
+  const explicit = process.env.SESSION_SECRET;
+  if (explicit && explicit.length >= 32) return new TextEncoder().encode(explicit);
+  const user = process.env.ADMIN_USERNAME ?? "";
+  const cred = process.env.ADMIN_PASSWORD ?? process.env.ADMIN_PASSWORD_HASH ?? "";
+  if (!user || !cred) throw new Error("Admin credentials are not configured.");
+  return new Uint8Array(sha256(`project-lab-session-v1:${user}:${cred}`));
 }
 
 function getSql() {
   const connectionString = process.env.DATABASE_URL;
-  if (!connectionString) throw new Error("DATABASE_URL is not configured.");
-  return neon(connectionString);
+  return connectionString ? neon(connectionString) : null;
 }
 
 export function isAdminConfigured() {
-  return Boolean(process.env.ADMIN_USERNAME && process.env.ADMIN_PASSWORD_HASH && process.env.SESSION_SECRET && process.env.DATABASE_URL);
+  return Boolean(process.env.ADMIN_USERNAME && (process.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD_HASH));
+}
+
+export function isDatabaseConfigured() {
+  return Boolean(process.env.DATABASE_URL);
 }
 
 export async function createAdminSession(username: string) {
@@ -48,6 +65,7 @@ export async function clearAdminSession() {
 }
 
 export async function getAdminSession() {
+  if (!isAdminConfigured()) return null;
   const store = await cookies();
   const token = store.get(cookieName)?.value;
   if (!token) return null;
@@ -71,13 +89,24 @@ export function requestOriginIsValid(request: Request) {
 }
 
 export function hashClientAddress(address: string) {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret || secret.length < 32) throw new Error("SESSION_SECRET must contain at least 32 characters.");
-  return createHash("sha256").update(`${secret}:${address}`).digest("hex");
+  return createHash("sha256").update(`${Buffer.from(getSessionKey()).toString("hex")}:${address}`).digest("hex");
 }
+
+// ---------------------------------------------------------------- login throttling
+const memoryAttempts = new Map<string, { start: number; attempts: number; blockedUntil: number }>();
+const WINDOW_MS = 15 * 60 * 1000;
 
 export async function consumeLoginAttempt(addressHash: string) {
   const sql = getSql();
+  if (!sql) {
+    const now = Date.now();
+    const cur = memoryAttempts.get(addressHash);
+    const entry = !cur || now - cur.start > WINDOW_MS ? { start: now, attempts: 0, blockedUntil: 0 } : cur;
+    entry.attempts += 1;
+    if (entry.attempts > 5 && !entry.blockedUntil) entry.blockedUntil = now + WINDOW_MS;
+    memoryAttempts.set(addressHash, entry);
+    return { blocked: entry.blockedUntil > now };
+  }
   const rows = await sql`
     INSERT INTO admin_login_limits (address_hash, window_started_at, attempts, blocked_until)
     VALUES (${addressHash}, now(), 1, NULL)
@@ -103,16 +132,23 @@ export async function consumeLoginAttempt(addressHash: string) {
 
 export async function clearLoginAttempts(addressHash: string) {
   const sql = getSql();
+  if (!sql) {
+    memoryAttempts.delete(addressHash);
+    return;
+  }
   await sql`DELETE FROM admin_login_limits WHERE address_hash = ${addressHash}`;
 }
 
 export async function verifyAdminCredentials(username: string, password: string) {
   const expectedUsername = process.env.ADMIN_USERNAME;
-  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
-  if (!expectedUsername || !passwordHash) return false;
+  if (!expectedUsername) return false;
+  const userOk = timingSafeEqual(sha256(username), sha256(expectedUsername));
 
-  // Verify a bcrypt-shaped hash even when the username is wrong to keep the
-  // response time close to the normal credential-check path.
+  const plain = process.env.ADMIN_PASSWORD;
+  if (plain) return userOk && timingSafeEqual(sha256(password), sha256(plain));
+
+  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
+  if (!passwordHash) return false;
   const passwordMatches = await compare(password, passwordHash).catch(() => false);
-  return username === expectedUsername && passwordMatches;
+  return userOk && passwordMatches;
 }

@@ -11,6 +11,17 @@ export const UNIMONITOR_OPS = [
   { id: "report", label: "report", description: "Full timestamped system report" },
   { id: "version", label: "--version", description: "Print the version" },
   { id: "help", label: "--help", description: "Command-line usage" },
+  { id: "whoami", label: "whoami", description: "Current user", shell: true },
+  { id: "uname", label: "uname -a", description: "Kernel and architecture", shell: true },
+  { id: "uptime", label: "uptime", description: "Uptime and load", shell: true },
+  { id: "date", label: "date", description: "Server date and time", shell: true },
+  { id: "df", label: "df -h", description: "Disk usage", shell: true },
+  { id: "free", label: "free -h", description: "Memory usage", shell: true },
+  { id: "osrelease", label: "cat /etc/os-release", description: "Operating system", shell: true },
+  { id: "cpuinfo", label: "cat /proc/cpuinfo", description: "CPU model and count", shell: true },
+  { id: "loadavg", label: "cat /proc/loadavg", description: "Load averages", shell: true },
+  { id: "ls", label: "ls -la", description: "UniMonitor files", shell: true },
+  { id: "pwd", label: "pwd", description: "Working directory", shell: true },
 ] as const;
 
 export type UnimonitorOp = (typeof UNIMONITOR_OPS)[number]["id"];

@@ -1,0 +1,42 @@
+{
+  "split": 1,
+  "val_groups": [
+    8,
+    9,
+    10
+  ],
+  "counts": {
+    "JumpingJack": {
+      "train": 69,
+      "val": 17,
+      "test": 37
+    },
+    "PushUps": {
+      "train": 60,
+      "val": 12,
+      "test": 30
+    },
+    "BodyWeightSquats": {
+      "train": 66,
+      "val": 16,
+      "test": 30
+    },
+    "Lunges": {
+      "train": 76,
+      "val": 14,
+      "test": 37
+    },
+    "TaiChi": {
+      "train": 60,
+      "val": 12,
+      "test": 28
+    },
+    "BoxingSpeedBag": {
+      "train": 81,
+      "val": 16,
+      "test": 37
+    }
+  },
+  "mean_cached_frames": 50.84957020057307,
+  "sample_fps": 8.0
+}

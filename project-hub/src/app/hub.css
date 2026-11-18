@@ -103,9 +103,9 @@
 .h-detail-head h1 { margin: 14px 0 0; font-size: clamp(38px, 5vw, 64px); letter-spacing: -.04em; line-height: 1.02; }
 .h-detail-head p { margin: 18px 0 0; font-size: 18px; line-height: 1.6; color: var(--h-muted); }
 .h-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
-.h-stage { margin: 8px 0 0; border-radius: 18px; padding: 14px; background: #0c1626; box-shadow: 0 34px 70px -36px rgba(15, 27, 45, .7); }
+.h-stage { margin: 8px 0 0; border-radius: 18px; padding: 14px; background: #ffffff; border: 1px solid var(--h-line); box-shadow: 0 24px 50px -34px rgba(15, 27, 45, .35); }
 .h-stage .ms-wrap, .h-stage .um-wrap { margin: 0; border: 0; background: transparent; padding: 0; }
-.h-stage-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 6px 14px; color: #9fb0c8; font: 600 11px var(--font-jbmono), monospace; letter-spacing: .1em; text-transform: uppercase; }
+.h-stage-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 6px 14px; color: var(--h-muted); font: 600 11px var(--font-jbmono), monospace; letter-spacing: .1em; text-transform: uppercase; }
 .h-stage-head span { display: inline-flex; align-items: center; gap: 8px; }
 .h-stage-head i { width: 8px; height: 8px; border-radius: 50%; background: #3ddc84; }
 .h-about { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; padding: 64px 0 90px; }
